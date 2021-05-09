@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="background">
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -8,7 +8,7 @@
  
 <script>
 export default {
-  name: 'Main',
+  name: 'Auth',
   data () {
     return {
      
@@ -16,3 +16,8 @@ export default {
   }
 }
 </script>
+<style>
+.background{
+  background: #F19240;
+}
+</style>
