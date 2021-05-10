@@ -8,3 +8,6 @@ export default {
   name: 'App'
 }
 </script>
+<style>
+@import "assets/css/custom.css";
+</style>
