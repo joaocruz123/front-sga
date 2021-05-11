@@ -1,38 +1,38 @@
+import store from 'src/store'
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/Main.vue'),
     children: [
-      { path: '', component: () => import('pages/Welcome.vue') }
+      { 
+        path: '',
+        name: 'home', 
+        component: () => import('pages/Home.vue'),
+      }, 
     ],
-
-    // beforeEnter: (to, from, next) => {
-    //   const publicPages = ['/login', '/pre-cadastro', '/esqueceu-senha', '/welcome'];
-    //   const authRequired = !publicPages.includes(to.path);
-    //   const loggedIn = localStorage.getItem('user');
-
-    //   if (authRequired && !loggedIn) {
-    //       return next('/login');
-    //   }
-
-    //   next();
-    // }
     beforeEnter: (to, from, next) => {
       const publicPages = ['/login', '/pre-cadastro', '/esqueceu-senha', '/welcome'];
       const authRequired = !publicPages.includes(to.path);
-      const isAuthenticated = store.getters["auth/isAuthenticated"]
-			
-      if (authRequired && !isAuthenticated) next({name: 'login'})
-			else next()
-		}
+      const loggedIn = localStorage.getItem('isAuthenticated');
+
+      if (authRequired && !loggedIn) {
+          return next('/login');
+      }
+
+      next();
+    }
   },
 
   {
     path: '/login',
     component: () => import('layouts/Auth.vue'),
     children: [
-      { path: '', component: () => import('pages/auth/Login.vue') }
+      { 
+        path: '',
+        name: 'login', 
+        component: () => import('pages/auth/Login.vue') 
+      }
     ],
   },
 
