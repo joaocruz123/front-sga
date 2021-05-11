@@ -47,11 +47,6 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # home
 --------------------------------------------------------------*/
-main{
-  border-radius: 25px 25px 0 0;
-  background: #fff;
-}
-
 .box-welcome{
   padding: 20px;
 }
@@ -61,6 +56,16 @@ main{
 }
 
 .box-welcome .user-name{
-  font-size: 22px;
+  font-size: 26px;
   font-weight: bold;
+}
+
+.img-user{
+  width: 65px;
+  height: auto;
+  position: absolute;
+  right: 30px;
+  top: 100%;
+  transform: translate(0, -50%);
+  border-radius: 50%;
 }

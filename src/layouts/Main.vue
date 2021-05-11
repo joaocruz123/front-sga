@@ -1,6 +1,6 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-primary text-white" style="height: 150px">
+    <q-header class="bg-primary text-white" style="height: 170px">
         <q-toolbar>
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
@@ -15,12 +15,18 @@
         <div class="box-welcome">
             <p>Seja Bem-vindo!</p>
             <p class="user-name">{{user}}</p>
+
+            <q-img src="~assets/img/avatar_sga.png" class="img-user" />
         </div>
     </q-header>
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
         <!-- drawer content -->
     </q-drawer>
+
+    <q-footer>
+        <FooterMenu></FooterMenu>
+    </q-footer>
 
     <q-dialog v-model="exit_app" persistent>
       <q-card>
@@ -43,7 +49,7 @@
 
 <script>
 import {mapActions} from 'vuex'
-
+import FooterMenu from './../components/menu/FooterMenu'
 let unsubscribe;
 
 export default {
@@ -54,6 +60,9 @@ export default {
             left: false,
             exit_app: false
         }
+    },
+    components:{
+        FooterMenu
     },
     methods: {
         ...mapActions("auth", ["logout"]),
@@ -73,3 +82,9 @@ export default {
     },
 }
 </script>
+<style scoped>
+main{
+  border-radius: 25px 25px 0 0;
+  background: #fff;
+}
+</style>
