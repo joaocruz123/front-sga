@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-/*--------------------------------------------------------------
-# Login
---------------------------------------------------------------*/
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  background-color: #F19240;
 }
 
 a {
@@ -22,6 +21,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Poppins", sans-serif;
 }
 
+/*--------------------------------------------------------------
+# Login
+--------------------------------------------------------------*/
 .box {
     width: 600px;
     height: 440px;
@@ -40,4 +42,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .box .q-field__label{
   font-size: 13px;
+}
+
+/*--------------------------------------------------------------
+# home
+--------------------------------------------------------------*/
+main{
+  border-radius: 25px 25px 0 0;
+  background: #fff;
+}
+
+.box-welcome{
+  padding: 20px;
+}
+
+.box-welcome p{
+  margin: 0;
+}
+
+.box-welcome .user-name{
+  font-size: 22px;
+  font-weight: bold;
 }

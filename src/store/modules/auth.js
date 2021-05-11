@@ -22,18 +22,15 @@ export default {
     },
     actions: {
         login(context, params) {
-            const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
-            
             let email = params[0]
             let password = params[1]
 
             Loading.show()
-            axios.request('post', `/login?email=${email}&password=${password}`, '', { Authorization: 'Bearer ' + token })
+            axios.request('post', `/login?email=${email}&password=${password}`, '', { Authorization: ' ' })
                 .then(response => {
                     context.commit('LOGIN_SUCCESS', response.data)
                     Loading.hide()
-                    this.$router.push({path: 'home'})
+                    this.$router.push({path: '/home'})
                 }).catch(error => {
                     context.commit('LOGIN_ERROR', response.data)
                     Loading.hide()
@@ -44,7 +41,7 @@ export default {
             let token = obj.token
 
             Loading.show()
-            axios.request('post', `/logout`, '', { Authorization: 'Bearer ' + token })
+            axios.request('get', `/logout`, '', { Authorization: 'Bearer ' + token })
                 .then(response => {
                     context.commit('LOGOUT_SUCCESS', response.data)
                     Loading.hide()
@@ -65,8 +62,9 @@ export default {
     mutations: {
         [LOGIN_SUCCESS](state, payload) {
             state.access_user = payload.result
-            localStorage.access_user = JSON.stringify(payload.result)
-            state.isAuthenticated = true
+            state.isAuthenticated = true,
+            localStorage.access_user = JSON.stringify(payload.result)            
+            localStorage.isAuthenticated = true
         },
         [LOGIN_ERROR](state, payload) {
             state.error = payload.error
@@ -76,8 +74,9 @@ export default {
         },
         [LOGOUT_SUCCESS](state,payload){
             state.access_user = {}
-            localStorage.access_user = ""
-            state.isAuthenticated = false
+            state.isAuthenticated = false,
+            localStorage.access_user = ""            
+            localStorage.isAuthenticated = false
         }
     }
 }

@@ -31,8 +31,9 @@
     </div>
 </q-page>
 </template>
-
 <script>
+import {mapActions, mapState} from 'vuex'
+
 export default {
     name: 'Login',
     data() {
@@ -43,5 +44,16 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapState("auth", ["isLoading"])
+    },
+    methods:{
+      ...mapActions("auth", ["login"]),
+      
+      reset(){
+          this.form.username = ''
+          this.form.password = ''
+      }
+    }
 }
 </script>
