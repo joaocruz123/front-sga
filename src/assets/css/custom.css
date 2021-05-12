@@ -2,7 +2,7 @@
 
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #444444;
   background-color: #F19240;
 }
@@ -19,6 +19,14 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Poppins", sans-serif;
+}
+
+header .q-btn .q-icon, .q-btn .q-spinner{
+  font-size: 19px;
+}
+
+footer .q-tab__icon{
+  font-size: 18px;
 }
 
 /*--------------------------------------------------------------
@@ -47,6 +55,15 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # home
 --------------------------------------------------------------*/
+.container {
+  color: black;
+}
+
+.card{
+  margin: 6px;
+  height: 140px;
+}
+
 .box-welcome{
   padding: 20px;
 }
@@ -66,6 +83,6 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   right: 30px;
   top: 100%;
-  transform: translate(0, -50%);
+  transform: translate(0, -75%);
   border-radius: 50%;
 }

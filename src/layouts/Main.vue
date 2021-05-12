@@ -18,6 +18,7 @@
 
             <q-img src="~assets/img/avatar_sga.png" class="img-user" />
         </div>
+        <div class="footer-header"></div>
     </q-header>
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
@@ -83,8 +84,12 @@ export default {
 }
 </script>
 <style scoped>
+.footer-header{
+    border-radius: 25px 25px 0 0;
+  background: #fff;
+  height: 25px;
+}
 main{
-  border-radius: 25px 25px 0 0;
   background: #fff;
 }
 </style>
