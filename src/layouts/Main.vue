@@ -19,7 +19,7 @@
             <q-img src="~assets/img/avatar_sga.png" class="img-user" />
         </div>
         <div class="footer-header"></div>
-    </q-header>
+    </q-header> 
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
         <!-- drawer content -->

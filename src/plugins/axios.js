@@ -2,8 +2,8 @@ import axios from 'axios'
 
 export default {
 
-    //Url da API
-    serverURI: 'http://localhost/api',
+    //serverURI: 'http://localhost/api',
+    serverURI: 'https://stormy-bastion-27921.herokuapp.com/api',
 
     request(method, uri, data = null, headers) {
         if (!method) {
