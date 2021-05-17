@@ -30,7 +30,7 @@ export default {
                 .then(response => {
                     context.commit('LOGIN_SUCCESS', response.data)
                     Loading.hide()
-                    this.$router.push({path: '/home'})
+                    this.$router.push({path: '/'})
                 }).catch(error => {
                     context.commit('LOGIN_ERROR', response.data)
                     Loading.hide()
@@ -38,10 +38,10 @@ export default {
         },
         logout(context) {
             const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
+            let token = obj.access_token
 
             Loading.show()
-            axios.request('get', `/logout`, '', { Authorization: 'Bearer ' + token })
+            axios.request('post', `/logout`, '', { Authorization: 'Bearer ' + token })
                 .then(response => {
                     context.commit('LOGOUT_SUCCESS', response.data)
                     Loading.hide()

@@ -2,7 +2,7 @@
 
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #444444;
   background-color: #F19240;
 }
@@ -19,6 +19,14 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Poppins", sans-serif;
+}
+
+header .q-btn .q-icon, .q-btn .q-spinner{
+  font-size: 19px;
+}
+
+footer .q-tab__icon{
+  font-size: 18px;
 }
 
 /*--------------------------------------------------------------
@@ -47,9 +55,40 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # home
 --------------------------------------------------------------*/
-main{
-  border-radius: 25px 25px 0 0;
-  background: #fff;
+.text-menu{
+  color: #707070;
+  font-weight: bold;
+}
+.box-user{
+  padding: 40px 20px 10px 20px;
+}
+
+.box-user .q-img{
+  width: 60px;
+  height: auto;
+}
+
+.box-user .nome{
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 0 0;
+}
+
+.box-user .atuacao{
+  color: #adadad;  
+  margin: 2px 0 0 0;
+}
+
+/*--------------------------------------------------------------
+# home
+--------------------------------------------------------------*/
+.container {
+  color: black;
+}
+
+.card{
+  margin: 6px;
+  height: 140px;
 }
 
 .box-welcome{
@@ -61,6 +100,26 @@ main{
 }
 
 .box-welcome .user-name{
-  font-size: 22px;
+  font-size: 26px;
   font-weight: bold;
+}
+
+.img-user{
+  width: 65px;
+  height: auto;
+  position: absolute;
+  right: 30px;
+  top: 100%;
+  transform: translate(0, -75%);
+  border-radius: 50%;
+}
+
+.top-menu{
+  height: 15px;
+  width: 100%;
+}
+
+.contador{
+  font-size: 32px;
+  margin: 15px 0; 
 }
