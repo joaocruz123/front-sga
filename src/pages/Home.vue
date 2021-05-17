@@ -1,42 +1,59 @@
 <template>
-<q-page class="flex">
-    <div class="container">
-        <div class="row q-pa-md gutter-sm">
-            <div class="col-xs-6 col-sm-6">
-                <q-card bordered class="bg-deep-purple-1 card">
-                    <q-card-section>
-                        <div class="text-subtitle2">Membros</div>
-                    </q-card-section>
-                </q-card>
-            </div>
-            <div class="col-xs-6 col-sm-6">
-               <q-card bordered class="bg-deep-purple-1 card">
-                    <q-card-section>
-                        <div class="text-subtitle2">Pastores</div>
-                    </q-card-section>
-                </q-card>
-            </div>
-            <div class="col-xs-6 col-sm-6">
-               <q-card bordered class="bg-deep-purple-1 card">
-                    <q-card-section>
-                        <div class="text-subtitle2">Batizados</div>
-                    </q-card-section>
-                </q-card>
-            </div>
-            <div class="col-xs-6 col-sm-6">
-               <q-card bordered class="bg-deep-purple-1 card">
-                    <q-card-section>
-                        <div class="text-subtitle2">Celulas</div>
-                    </q-card-section>
-                </q-card>
-            </div>
-        </div>
-    </div>
+<q-page>
+    <q-tab-panels v-model="selected_tab" animated vertical transition-prev="jump-up" transition-next="jump-up">
+        <q-tab-panel name="home">
+            <Dashboard></Dashboard>
+        </q-tab-panel>
+
+        <q-tab-panel name="calendar">
+            <div class="text-h4 q-mb-md">Calendario</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+        </q-tab-panel>
+
+        <q-tab-panel name="search">
+            <div class="text-h4 q-mb-md">Movies</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+
+        </q-tab-panel>
+
+        <q-tab-panel name="favorite">
+            <div class="text-h4 q-mb-md">Movies</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+        </q-tab-panel>
+    </q-tab-panels>
 </q-page>
 </template>
 
 <script>
+import {
+    mapActions,
+    mapState
+} from 'vuex'
+import Dashboard from './home/Dashboard.vue'
+
 export default {
-    name: 'Home'
+  components: { Dashboard },
+    name: 'Home',
+    data() {
+        return {}
+    },
+    computed: {
+        ...mapState("home", ["selected_tab"])
+    },
+    methods: {
+        ...mapActions("home", ["alterTab"]),
+
+    }
 }
 </script>

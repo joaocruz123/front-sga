@@ -22,7 +22,7 @@
     </q-header> 
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
-        <!-- drawer content -->
+        <Menu></Menu>
     </q-drawer>
 
     <q-footer>
@@ -50,6 +50,7 @@
 
 <script>
 import {mapActions} from 'vuex'
+import Menu from './../components/menu/Menu'
 import FooterMenu from './../components/menu/FooterMenu'
 let unsubscribe;
 
@@ -63,6 +64,7 @@ export default {
         }
     },
     components:{
+        Menu,
         FooterMenu
     },
     methods: {
