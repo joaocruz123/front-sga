@@ -17,12 +17,12 @@ import {
 } from 'vuex'
 
 export default {
-    name: 'FooterMenu',
+    name: 'FooterHome',
     data() {
         return {}
     },
     methods:{
-      ...mapActions("home", ["alterTab"]),
+      ...mapActions("navigation", ["alterTab"]),
       
     }
 }

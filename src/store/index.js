@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './modules/auth'
-import home from './modules/home'
+import navigation from './modules/navigation'
 import membros from './modules/membros'
 
 Vue.use(Vuex)
@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
         auth,
-        home,
+        navigation,
         membros
     },
 })

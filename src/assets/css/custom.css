@@ -53,12 +53,18 @@ footer .q-tab__icon{
 }
 
 /*--------------------------------------------------------------
-# home
+# Menu
 --------------------------------------------------------------*/
-.text-menu{
+.text-menu {
   color: #707070;
   font-weight: bold;
 }
+
+.text-menu a{
+  color: #707070;
+  font-weight: bold;
+}
+
 .box-user{
   padding: 40px 20px 10px 20px;
 }

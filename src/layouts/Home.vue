@@ -5,12 +5,20 @@
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
             <q-toolbar-title>
-                {{name_page}}
             </q-toolbar-title>
 
-            <q-btn dense flat round icon="arrow_back_ios" />
+            <q-btn dense flat round icon="notifications" />
+            <q-btn dense flat round icon="share" />
+            <q-btn dense flat round icon="exit_to_app" @click="exit_app = true" />
         </q-toolbar>
-    </q-header>
+
+        <div class="box-welcome">
+            <p>Seja Bem-vindo!</p>
+            <p class="user-name">{{user}}</p>
+
+            <q-img src="~assets/img/avatar_sga.png" class="img-user" />
+        </div>
+    </q-header> 
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
         <Menu></Menu>
@@ -19,50 +27,45 @@
     <q-page-container>
         <router-view />
     </q-page-container>
-
-    <!-- <q-footer>
-        <FooterMenu></FooterMenu>
-    </q-footer> -->
-
+    
+    <q-footer>
+        <FooterHome></FooterHome>
+    </q-footer>
+    
     <q-dialog v-model="exit_app" persistent>
-        <q-card>
-            <q-card-section class="row items-center">
-                <span class="q-ml-sm">Essa ação resultará no logoff da sessão. Deseja continuar?</span>
-            </q-card-section>
+      <q-card>
+        <q-card-section class="row items-center">
+          <span class="q-ml-sm">Essa ação resultará no logoff da sessão. Deseja continuar?</span>
+        </q-card-section>
 
-            <q-card-actions align="right">
-                <q-btn flat label="Cancelar" color="primary" v-close-popup />
-                <q-btn flat label="Sair" @click="logout()" color="negative" v-close-popup />
-            </q-card-actions>
-        </q-card>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancelar" color="primary" v-close-popup />
+          <q-btn flat label="Sair" @click="logout()" color="negative" v-close-popup />
+        </q-card-actions>
+      </q-card>
     </q-dialog>
 </q-layout>
 </template>
 
 <script>
-import {
-    mapActions,
-    mapState
-} from 'vuex'
+import {mapActions} from 'vuex'
 import Menu from './../components/menu/Menu'
-import FooterMain from './../components/menu/FooterMain'
+import FooterHome from './../components/menu/FooterHome'
 let unsubscribe;
 
 export default {
     name: 'Main',
     data() {
         return {
+            path: '',
             user: '',
             left: false,
             exit_app: false
         }
     },
-    components: {
+    components:{
         Menu,
-        FooterMain
-    },
-    computed: {
-        ...mapState("navigation", ["name_page"])
+        FooterHome
     },
     methods: {
         ...mapActions("auth", ["logout"]),
@@ -82,19 +85,16 @@ export default {
     },
 }
 </script>
-
 <style scoped>
-.header-home {
+.header-home{
     height: 170px
 }
-
-.footer-header {
-    border-radius: 25px 25px 0 0;
-    background: #fff;
-    height: 25px;
+.footer-header{
+  border-radius: 25px 25px 0 0;
+  background: #fff;
+  height: 25px;
 }
-
-main {
-    background: #fff;
+main{
+  background: #fff;
 }
 </style>

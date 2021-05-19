@@ -43,16 +43,18 @@ import {
 import Dashboard from './home/Dashboard.vue'
 
 export default {
-  components: { Dashboard },
+    components: {
+        Dashboard
+    },
     name: 'Home',
     data() {
         return {}
     },
     computed: {
-        ...mapState("home", ["selected_tab"])
+        ...mapState("navigation", ["selected_tab"])
     },
     methods: {
-        ...mapActions("home", ["alterTab"]),
+        ...mapActions("navigation", ["alterTab"]),
 
     }
 }

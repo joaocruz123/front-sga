@@ -3,7 +3,7 @@ import store from 'src/store'
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/Main.vue'),
+    component: () => import('layouts/Home.vue'),
     children: [
       { 
         path: '',
@@ -11,6 +11,31 @@ const routes = [
         component: () => import('pages/Home.vue'),
       }, 
     ],
+
+    beforeEnter: (to, from, next) => {
+      const publicPages = ['/login', '/pre-cadastro', '/esqueceu-senha', '/welcome'];
+      const authRequired = !publicPages.includes(to.path);
+      const loggedIn = localStorage.getItem('isAuthenticated');
+
+      if (authRequired && !loggedIn) {
+          return next('/login');
+      }
+
+      next();
+    }
+  },
+
+  {
+    path: '/',
+    component: () => import('layouts/Main.vue'),
+    children: [
+      { 
+        path: 'membros',
+        name: 'membros', 
+        component: () => import('pages/membros/Membros.vue'),
+      }, 
+    ],
+
     beforeEnter: (to, from, next) => {
       const publicPages = ['/login', '/pre-cadastro', '/esqueceu-senha', '/welcome'];
       const authRequired = !publicPages.includes(to.path);
