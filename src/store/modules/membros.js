@@ -20,13 +20,14 @@ export default {
     actions: {
         getMembros(context) {
             const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
+            let token = obj.access_token
 
-            Loading.show()
-            axios.request('get', `/membros/`, '', { Authorization: 'Bearer ' + token })
+            context.commit('GET_DATA', true)
+
+            axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
-                Loading.hide()
+                context.commit('GET_DATA', false)
             }).catch(error => {
                 context.commit('GET_DATA_FAILURE', response.data)
                 this.error = error
@@ -34,10 +35,10 @@ export default {
         },
         saveMembro(context, data){
             const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
+            let token = obj.access_token
 
             Loading.show()
-            axios.request('post', `/membros/`, data, { Authorization: 'Bearer ' + token })
+            axios.request('post', `/membros`, data, { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('CREATE_SUCCESS', response.data)
                 Loading.hide()
@@ -53,7 +54,7 @@ export default {
         },
         editMembro(context, params){
             const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
+            let token = obj.access_token
 
             Loading.show()
 
@@ -96,8 +97,11 @@ export default {
         }
     },
     mutations: {
+        [GET_DATA](state, payload) {
+            state.isLoading = payload
+        },
         [GET_DATA_SUCCESS](state, payload) {
-            state.membros = payload
+            state.membros = payload.data
         },
         [CREATE_SUCCESS](state,payload){
 

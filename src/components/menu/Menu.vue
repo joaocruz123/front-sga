@@ -1,15 +1,13 @@
 <template>
 <div>
-    <div class="bg-primary top-menu"></div>
-
-    <div class="box-user">
+    <div class="box-user text-center">
         <q-img src="~assets/img/avatar_sga.png" />
         <div class="nome">João Paulo Franco da Cruz</div>
         <div class="atuacao">Membro</div>
     </div>
 
     <q-list bordered padding class="rounded-borders text-menu">
-        <q-item clickable v-ripple :active="link === 'home'" @click="link = 'home'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'home'" @click="setMenuActive('home')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="home" />
             </q-item-section>
@@ -17,15 +15,22 @@
             <q-item-section>Inico</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple :active="link === 'secretaria'" @click="link = 'secretaria'" active-class="my-menu-link">
-            <q-item-section avatar>
-                <q-icon name="person" />
-            </q-item-section>
+        <q-expansion-item icon="person" label="Secretaria">
+            <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'membros'" @click="setMenuActive('membros')" active-class="my-menu-link">
+                <q-item-section>Membros</q-item-section>
+            </q-item>
+            <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'cargos'" @click="setMenuActive('cargos')" active-class="my-menu-link">
+                <q-item-section>Cargos</q-item-section>
+            </q-item>
+             <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'nomeacoes'" @click="setMenuActive('nomeacoes')" active-class="my-menu-link">
+                <q-item-section>Nomeações</q-item-section>
+            </q-item>
+             <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'carteira'" @click="setMenuActive('carteira')" active-class="my-menu-link">
+                <q-item-section>Carteira</q-item-section>
+            </q-item>
+        </q-expansion-item>
 
-            <q-item-section>Secretaria</q-item-section>
-        </q-item>
-
-        <q-item clickable v-ripple :active="link === 'agenda'" @click="link = 'agenda'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'agenda'" @click="setMenuActive('agenda')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="book" />
             </q-item-section>
@@ -33,7 +38,7 @@
             <q-item-section>Agenda</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple :active="link === 'financeiro'" @click="link = 'financeiro'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'financeiro'" @click="setMenuActive('financeiro')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="attach_money" />
             </q-item-section>
@@ -41,7 +46,7 @@
             <q-item-section>Financeiro</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple :active="link === 'celulas'" @click="link = 'celulas'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'celulas'" @click="setMenuActive('celulas')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="group" />
             </q-item-section>
@@ -51,7 +56,7 @@
 
         <q-separator spaced />
 
-        <q-item clickable v-ripple :active="link === 'settings'" @click="link = 'settings'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'configuracao'" @click="setMenuActive('configuracao')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="settings" />
             </q-item-section>
@@ -59,7 +64,7 @@
             <q-item-section>Settings</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple :active="link === 'help'" @click="link = 'help'" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'ajuda'" @click="setMenuActive('ajuda')" active-class="my-menu-link">
             <q-item-section avatar>
                 <q-icon name="help" />
             </q-item-section>
@@ -71,19 +76,29 @@
 </template>
 
 <script>
+import {mapActions, mapState} from 'vuex'
 export default {
     name: 'Menu',
     data() {
-        return {
-            link: 'home'
-        }
+        return {}
     },
+     computed: {
+        ...mapState("navigation", ["selected_menu"])
+    },
+    methods: {
+        ...mapActions("navigation", ["setMenuActive"]),
+    }
 }
 </script>
 
 <style>
 .my-menu-link {
-    color: #F19240;
-    background: #d1ced4;
+    color: #fff;
+    background: #d66f16;
+}
+
+.q-expansion-item__content{
+    color: #353535;
+    font-weight: 400;
 }
 </style>

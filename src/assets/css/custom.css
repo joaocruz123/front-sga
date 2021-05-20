@@ -4,7 +4,7 @@
 body {
   font-family: "Poppins", sans-serif;
   color: #444444;
-  background-color: #F19240;
+  background-color: #f1f1f1;
 }
 
 a {
@@ -53,12 +53,18 @@ footer .q-tab__icon{
 }
 
 /*--------------------------------------------------------------
-# home
+# Menu
 --------------------------------------------------------------*/
-.text-menu{
+.text-menu {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.text-menu a{
   color: #707070;
   font-weight: bold;
 }
+
 .box-user{
   padding: 40px 20px 10px 20px;
 }
@@ -66,17 +72,24 @@ footer .q-tab__icon{
 .box-user .q-img{
   width: 60px;
   height: auto;
+  border: 3px solid #fff;
+  border-radius: 50%;
 }
 
 .box-user .nome{
+  color:#fff;
   font-size: 18px;
   font-weight: bold;
   margin: 10px 0 0 0;
 }
 
 .box-user .atuacao{
-  color: #adadad;  
+  color: #353535;  
   margin: 2px 0 0 0;
+}
+
+.q-drawer--left.q-drawer--bordered{
+  background: #F19240;
 }
 
 /*--------------------------------------------------------------
@@ -88,7 +101,9 @@ footer .q-tab__icon{
 
 .card{
   margin: 6px;
-  height: 140px;
+  height: 120px;
+  /* box-shadow: 0 1px 1px rgb(0 0 0 / 10%); */
+  box-shadow: none;
 }
 
 .box-welcome{
@@ -117,6 +132,9 @@ footer .q-tab__icon{
 .top-menu{
   height: 15px;
   width: 100%;
+}
+.q-tab-panels {
+  background: none;
 }
 
 .contador{
