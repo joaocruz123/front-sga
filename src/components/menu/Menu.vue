@@ -1,8 +1,6 @@
 <template>
 <div>
-    <div class="bg-primary top-menu"></div>
-
-    <div class="box-user">
+    <div class="box-user text-center">
         <q-img src="~assets/img/avatar_sga.png" />
         <div class="nome">João Paulo Franco da Cruz</div>
         <div class="atuacao">Membro</div>
@@ -18,7 +16,7 @@
         </q-item>
 
         <q-expansion-item icon="person" label="Secretaria">
-            <q-item class="item-submenu" to="membros" clickable v-ripple :active="selected_menu === 'membros'" @click="setMenuActive('membros')" active-class="my-menu-link">
+            <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'membros'" @click="setMenuActive('membros')" active-class="my-menu-link">
                 <q-item-section>Membros</q-item-section>
             </q-item>
             <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'cargos'" @click="setMenuActive('cargos')" active-class="my-menu-link">
@@ -95,12 +93,12 @@ export default {
 
 <style>
 .my-menu-link {
-    color: #F19240;
-    background: #d1ced4;
+    color: #fff;
+    background: #d66f16;
 }
 
 .q-expansion-item__content{
-    color: #a4a3a3;
+    color: #353535;
     font-weight: 400;
 }
 </style>

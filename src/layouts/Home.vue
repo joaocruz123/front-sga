@@ -12,12 +12,10 @@
             <q-btn dense flat round icon="exit_to_app" @click="exit_app = true" />
         </q-toolbar>
 
-        <div class="box-welcome">
+        <!-- <div class="box-welcome">
             <p>Seja Bem-vindo!</p>
             <p class="user-name">{{user}}</p>
-
-            <q-img src="~assets/img/avatar_sga.png" class="img-user" />
-        </div>
+        </div> -->
     </q-header> 
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
@@ -88,13 +86,5 @@ export default {
 <style scoped>
 .header-home{
     height: 170px
-}
-.footer-header{
-  border-radius: 25px 25px 0 0;
-  background: #fff;
-  height: 25px;
-}
-main{
-  background: #fff;
 }
 </style>

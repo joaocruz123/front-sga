@@ -1,7 +1,7 @@
 <template>
 <div class="row gutter-sm">
     <div class="col-xs-6 col-sm-3">
-        <q-card bordered class="bg-deep-purple-1 card">
+        <q-card class="card">
             <q-card-section>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8">
@@ -18,7 +18,7 @@
         </q-card>
     </div>
     <div class="col-xs-6 col-sm-3">
-        <q-card bordered class="bg-deep-purple-1 card">
+        <q-card class="card">
             <q-card-section>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8">
@@ -35,7 +35,7 @@
         </q-card>
     </div>
     <div class="col-xs-6 col-sm-3">
-        <q-card bordered class="bg-deep-purple-1 card">
+        <q-card class="card">
             <q-card-section>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8">
@@ -52,7 +52,7 @@
         </q-card>
     </div>
     <div class="col-xs-6 col-sm-3">
-        <q-card bordered class="bg-deep-purple-1 card">
+        <q-card class="card">
             <q-card-section>
                 <div class="row">
                     <div class="col-xs-8 col-sm-8">
