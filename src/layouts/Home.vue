@@ -1,10 +1,11 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-primary text-white">
+    <q-header class="bg-grey-11 text-primary">
         <q-toolbar>
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
             <q-toolbar-title>
+                {{name_page}}
             </q-toolbar-title>
 
             <q-btn dense flat round icon="notifications" />
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import Menu from './../components/menu/Menu'
 import FooterHome from './../components/menu/FooterHome'
 let unsubscribe;
@@ -65,8 +66,16 @@ export default {
         Menu,
         FooterHome
     },
+    created() {
+        this.setNamePage('Dashboard')
+    },
+    computed: {
+        ...mapState("navigation", ["name_page"])
+    },
     methods: {
         ...mapActions("auth", ["logout"]),
+        ...mapActions("navigation", ["setNamePage"]),
+
     },
     mounted() {
         const obj = JSON.parse(localStorage.access_user);

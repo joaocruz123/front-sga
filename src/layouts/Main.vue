@@ -1,6 +1,6 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-primary text-white">
+    <q-header class="bg-grey-11 text-primary">
         <q-toolbar>
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
@@ -20,9 +20,6 @@
         <router-view />
     </q-page-container>
 
-    <!-- <q-footer>
-        <FooterMenu></FooterMenu>
-    </q-footer> -->
 
     <q-dialog v-model="exit_app" persistent>
         <q-card>
