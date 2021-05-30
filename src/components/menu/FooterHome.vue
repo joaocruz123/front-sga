@@ -1,5 +1,5 @@
 <template>
-<q-tabs inline-label class="bg-grey-11 text-primary shadow-2">
+<q-tabs inline-label class="bg-white text-primary shadow-2">
     <q-tab name="home" icon="home" @click="alterTab('home')"/>
     <q-tab name="calendar" icon="today" @click="alterTab('calendar')"/>
     <q-tab name="search" icon="search" @click="alterTab('search')"/>

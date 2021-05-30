@@ -7,7 +7,7 @@
     </div>
 
     <q-list bordered padding class="rounded-borders text-menu">
-        <q-item clickable v-ripple :active="selected_menu === 'home'" @click="setMenuActive('home')" active-class="my-menu-link">
+        <q-item clickable v-ripple :active="selected_menu === 'home'" @click="setMenuActive('home')" active-class="active-link" to="/">
             <q-item-section avatar>
                 <q-icon name="home" />
             </q-item-section>
@@ -16,7 +16,7 @@
         </q-item>
 
         <q-expansion-item icon="person" label="Secretaria">
-            <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'membros'" @click="setMenuActive('membros')" active-class="my-menu-link">
+            <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'membros'" @click="setMenuActive('membros')" active-class="my-menu-link" to="membros">
                 <q-item-section>Membros</q-item-section>
             </q-item>
             <q-item class="item-submenu" clickable v-ripple :active="selected_menu === 'cargos'" @click="setMenuActive('cargos')" active-class="my-menu-link">
@@ -95,10 +95,5 @@ export default {
 .my-menu-link {
     color: #fff;
     background: #d66f16;
-}
-
-.q-expansion-item__content{
-    color: #353535;
-    font-weight: 400;
 }
 </style>

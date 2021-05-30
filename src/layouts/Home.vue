@@ -1,11 +1,10 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-grey-11 text-primary">
+    <q-header class="bg-primary text-white header-home">
         <q-toolbar>
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
             <q-toolbar-title>
-                {{name_page}}
             </q-toolbar-title>
 
             <q-btn dense flat round icon="notifications" />
@@ -13,17 +12,21 @@
             <q-btn dense flat round icon="exit_to_app" @click="exit_app = true" />
         </q-toolbar>
 
-        <!-- <div class="box-welcome">
+        <div class="box-welcome">
             <p>Seja Bem-vindo!</p>
             <p class="user-name">{{user}}</p>
-        </div> -->
-    </q-header> 
+        </div>
+    </q-header>
+    
 
     <q-drawer show-if-above v-model="left" side="left" bordered>
         <Menu></Menu>
     </q-drawer>
 
     <q-page-container>
+        <div class="teste">
+
+    </div> 
         <router-view />
     </q-page-container>
     
@@ -94,6 +97,7 @@ export default {
 </script>
 <style scoped>
 .header-home{
-    height: 170px
+    height: 150px;
+    border-radius: 0 0 20px 20px;
 }
 </style>

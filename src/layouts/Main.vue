@@ -1,6 +1,6 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-grey-11 text-primary">
+    <q-header class="bg-white text-primary">
         <q-toolbar>
             <q-btn dense flat round icon="menu" @click="left = !left" />
 
@@ -8,7 +8,6 @@
                 {{name_page}}
             </q-toolbar-title>
 
-            <q-btn dense flat round icon="arrow_back_ios" />
         </q-toolbar>
     </q-header>
 
@@ -19,7 +18,6 @@
     <q-page-container>
         <router-view />
     </q-page-container>
-
 
     <q-dialog v-model="exit_app" persistent>
         <q-card>
@@ -89,9 +87,5 @@ export default {
     border-radius: 25px 25px 0 0;
     background: #fff;
     height: 25px;
-}
-
-main {
-    background: #fff;
 }
 </style>
