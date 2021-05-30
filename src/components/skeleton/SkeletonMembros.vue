@@ -48,6 +48,6 @@
 </template>
 <script>
 export default {
-    name:'Skeleton'
+    name:'SkeletonMembros'
 }
 </script>

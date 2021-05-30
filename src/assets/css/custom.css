@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: #444444;
-  background-color: #f1f1f1;
+  font-family: 'Nunito', sans-serif;
+  color: #4e4e4e;
+  background-color: #ffffff;
 }
 
 a {
@@ -29,6 +30,10 @@ footer .q-tab__icon{
   font-size: 18px;
 }
 
+.q-toolbar__title{
+  font-size: 24px;
+  font-weight: bold;
+}
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/
@@ -57,12 +62,10 @@ footer .q-tab__icon{
 --------------------------------------------------------------*/
 .text-menu {
   color: #ffffff;
-  font-weight: bold;
 }
 
 .text-menu a{
-  color: #707070;
-  font-weight: bold;
+  color: #ffffff;
 }
 
 .box-user{
@@ -72,14 +75,11 @@ footer .q-tab__icon{
 .box-user .q-img{
   width: 60px;
   height: auto;
-  border: 3px solid #fff;
-  border-radius: 50%;
 }
 
 .box-user .nome{
   color:#fff;
   font-size: 18px;
-  font-weight: bold;
   margin: 10px 0 0 0;
 }
 
@@ -90,6 +90,7 @@ footer .q-tab__icon{
 
 .q-drawer--left.q-drawer--bordered{
   background: #F19240;
+  border: none;
 }
 
 /*--------------------------------------------------------------
@@ -100,10 +101,11 @@ footer .q-tab__icon{
 }
 
 .card{
+  color: #fff;
   margin: 6px;
-  height: 120px;
-  /* box-shadow: 0 1px 1px rgb(0 0 0 / 10%); */
-  box-shadow: none;
+  height: 150px;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+  /* box-shadow: none; */
 }
 
 .box-welcome{
@@ -133,11 +135,26 @@ footer .q-tab__icon{
   height: 15px;
   width: 100%;
 }
+
 .q-tab-panels {
   background: none;
 }
 
 .contador{
   font-size: 32px;
-  margin: 15px 0; 
+  margin: 5px 0; 
+}
+
+.text-subtitle2{
+  margin: 8px 0; 
+}
+
+.q-table__card{
+  box-shadow: none;
+}
+
+.subtitle-head{
+  color: #b4b3b3;
+  font-size: 14px;
+  margin: 20px 0 0 0;
 }
