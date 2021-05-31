@@ -8,12 +8,7 @@
         <Skeleton></Skeleton>
     </div>
 
-    <q-table :data="membros" :columns="columns" row-key="name" hide-bottom hide-header v-else>
-        <!-- <template v-slot:top>
-            <div class="col" />
-            <q-btn color="secondary" icon="add" label="new" @click="$router.push({ name: 'membro', params: { id: 0 } })" />
-        </template> -->
-
+    <!-- <q-table :data="membros" :columns="columns" row-key="name" hide-header v-else>
         <template v-slot:header="props">
             <q-tr :props="props">
                 <q-th v-for="col in props.cols" :key="col.name" :props="props">
@@ -26,10 +21,8 @@
         <template v-slot:body="props">
             <q-tr :props="props">
                 <q-td v-for="col in props.cols" :key="col.name" :props="props" @click="open(props.row.id)">
-                    <span v-if="col.name === 'avatar'">
-                        <q-avatar>
-                            <img :src="`http://localhost/uploads/avatars/${col.value}`">
-                        </q-avatar>
+                    <span class="membro-avatar" v-if="col.name === 'avatar'">
+                        <img :src="`http://localhost/uploads/avatars/${col.value}`">
                     </span>
                     <span v-else>
                         <span v-if="col.name === 'afastado'">
@@ -40,19 +33,38 @@
                         <span v-else>{{ col.value }}</span>
                     </span>
                 </q-td>
-                <!-- <q-td auto-width>
-                    <q-btn flat round color="accent" icon="edit" @click="$router.push({ name: 'membro', params: { id: props.row.id } })" />
-                    <q-btn flat round color="negative" icon="delete_outline" @click="confirmRemove(props.row.id)" />
-                </q-td> -->
             </q-tr>
         </template>
 
-    </q-table>
+    </q-table> -->
 
+    <q-list v-else>
+        <div v-for="membro in membros" :key="membro.id" >
+            <q-item clickable v-ripple @click="open(membro.id)">
+                <q-item-section avatar>
+                    <span class="membro-avatar">
+                        <img :src="`http://localhost/uploads/avatars/${membro.avatar}`">
+                    </span>
+                </q-item-section>
+
+                <q-item-section>
+                    <q-item-label lines="1">{{membro.nome}}</q-item-label>
+                    <q-item-label caption lines="2">{{membro.email}}</q-item-label>
+                    <q-item-label caption lines="2">{{membro.cpf}}</q-item-label>
+                </q-item-section>
+
+                <q-item-section side top>
+                    <q-badge :color="membro.afastado === 'nao'? 'green' : 'red' ">
+                        {{membro.afastado === 'nao' ? 'Ativo' : 'Inatio'}}
+                    </q-badge>
+                </q-item-section>
+            </q-item>
+        </div>
+    </q-list>
     <q-dialog v-model="actions" :position="'bottom'">
         <q-card style="width: 350px; padding: 20px;">
-            <q-btn outline class="full-width" color="primary" style="margin-bottom: 10px;" label="Editar" icon="edit" @click="$router.push({ name: 'membro', params: { id: action_id } })" />
-            <q-btn outline class="full-width" style="color: red" label="Excluir" icon="delete" @click="confirmRemove(action_id)" />
+            <q-btn class="full-width" color="primary" style="margin-bottom: 10px;" label="Editar" icon="edit" @click="$router.push({ name: 'membro', params: { id: action_id } })" />
+            <q-btn class="full-width" color="negative" label="Excluir" icon="delete" @click="confirmRemove(action_id)" />
         </q-card>
     </q-dialog>
     <q-dialog v-model="confirm_remove" persistent transition-show="flip-down" transition-hide="flip-up">
@@ -76,7 +88,7 @@
     </q-dialog>
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-btn round color="secondary" icon="add" />
+        <q-btn round color="secondary" icon="add" @click="$router.push({ name: 'membro', params: { id: 0 } })" />
     </q-page-sticky>
 
 </q-page>
@@ -131,7 +143,7 @@ export default {
     },
     methods: {
         ...mapActions("membros", ["getMembros", "deleteMembros"]),
-        ...mapActions("navigation", ["setNamePage"]),
+        ...mapActions("navigation", ["setNamePage", "setCreateData"]),
 
         confirmRemove(id) {
             this.action_id = id
@@ -151,6 +163,7 @@ export default {
     },
     created() {
         this.setNamePage('Membros')
+        this.setCreateData(false)
         this.getMembros()
     }
 }
@@ -159,5 +172,10 @@ export default {
 <style scoped>
 .q-table__container {
     background: none;
+}
+.q-item{
+    background: #eeeeee;
+    margin: 10px;
+    border-radius: 10px;
 }
 </style>

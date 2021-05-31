@@ -3,9 +3,11 @@ import {Loading} from 'quasar'
 import { Notify } from 'quasar'
 
 import {
+    GET_DATA,
     SET_DATA_TAB,
     SET_DATA_MENU,
-    SET_DATA_NAME
+    SET_DATA_NAME,
+    SET_BACK_PAGE
 } from '../mutation_type'
 
 export default {
@@ -14,7 +16,9 @@ export default {
         isLoading: false,
         selected_tab: 'home',
         selected_menu: '',
-        name_page: 'Teste'
+        name_page: '',
+        back: null,
+        create: false,
     },
     actions: {
         alterTab(context, tab) {
@@ -25,6 +29,12 @@ export default {
         },
         setNamePage(context, name){
             context.commit('SET_DATA_NAME', name)
+        },
+        setBackPage(context, name){
+            context.commit('SET_BACK_PAGE', name)
+        },
+        setCreateData(context, status){
+            context.commit('GET_DATA', status)
         }
     },
     mutations: {
@@ -36,6 +46,12 @@ export default {
         },
         [SET_DATA_NAME](state, payload) {
             state.name_page = payload
+        },
+        [SET_BACK_PAGE](state, payload){
+            state.back = payload
+        },
+        [GET_DATA](state, payload){
+            state.create = payload
         }
     }
 }
