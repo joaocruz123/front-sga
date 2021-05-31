@@ -35,6 +35,10 @@ footer .q-tab__icon{
   font-weight: bold;
 }
 
+.q-loading::before{
+  opacity: 1;
+}
+
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/
@@ -90,7 +94,7 @@ footer .q-tab__icon{
 }
 
 .q-drawer--left.q-drawer--bordered{
-  background: #fc7938;
+  background: #f2844e;
   border: none;
 }
 

@@ -37,12 +37,16 @@
             </q-input>
         </div>
 
-        <div class="col-xs-12 col-sm-4">
-            <q-input type="number" v-model="idade" label="Idade" />
+        <div class="col-xs-12 col-sm-6">
+            <q-select v-model="estado_civil" :options="options_estado_civil" label="Estado Civil" />
         </div>
 
         <div class="col-xs-12 col-sm-12">
             <div class="text-h6 h6 text-primary">Dados de Endereço</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <q-input type="number" v-model="cep" label="Cep" @blur="searchCep()" />
         </div>
 
         <div class="col-xs-12 col-sm-6">
@@ -53,32 +57,20 @@
             <q-input type="text" v-model="bairro" label="Bairro" />
         </div>
 
-        <div class="col-xs-12 col-sm-12">
-            <div class="text-h6 h6 text-primary">Dados de Estado Civil</div>
+        <div class="col-xs-12 col-sm-6">
+            <q-input type="number" v-model="numero" label="Numero" />
+        </div>
+
+         <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="complemento" label="Complemento" />
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <q-select v-model="estado_civil" :options="options_estado_civil" label="Estado Civil" />
+            <q-input type="text" v-model="cidade" label="Bairro" />
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <q-input v-model="data_casamento" mask="date" label="Data do Casamento" :disable="disableField()">
-                <template v-slot:prepend>
-                    <q-icon name="event" class="cursor-pointer">
-                        <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                            <q-date v-model="data_casamento" @input="() => $refs.qDateProxy.hide()" />
-                        </q-popup-proxy>
-                    </q-icon>
-                </template>
-            </q-input>
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-            <q-select v-model="tipo_casamento" :options="options_tipo_casamento" label="Tipo de Casamento" :disable="disableField()" />
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-            <q-input type="text" v-model="nome_conjugue" label="Nome do Conjugue" :disable="disableField()" />
+            <q-input type="text" v-model="estado" label="Estado" />
         </div>
 
         <div class="col-xs-12 col-sm-12">
@@ -116,6 +108,8 @@
 
 <script>
 import axios from './../../plugins/axios'
+import { api, via } from 'boot/axios'
+
 import {
     mapActions,
     mapState
@@ -129,15 +123,16 @@ export default {
             cpf: '',
             sexo: '',
             telefone: '',
+            cep: '',
             bairro: '',
             endereco: '',
-            idade: '',
+            numero: '',
+            complemento: '',
+            cidade: '',
+            estado: '',
             email: '',
             data_nascimento: '',
             estado_civil: '',
-            data_casamento: '',
-            tipo_casamento: '',
-            nome_conjugue: '',
             profissao: '',
             endereco_trabalho: '',
             cargo: '',
@@ -154,6 +149,22 @@ export default {
     methods: {
         ...mapActions("membros", ["saveMembro", "editMembro", "getMembroDetails"]),
         ...mapActions("navigation", ["setNamePage", "setBackPage", "setCreateData"]),
+
+        searchCep() {
+            if (this.cep.length === 8) {
+                via.get(`/${ this.cep }/json/`)
+                    .then(response => {
+                        this.endereco = response.data.logradouro
+                        this.bairro = response.data.bairro
+                        this.cidade = response.data.localidade
+                        this.estado = response.data.uf
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            }
+
+        },
 
         disableField() {
             if (this.estado_civil === "Solteiro(a)") {
