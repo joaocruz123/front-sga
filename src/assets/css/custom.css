@@ -31,9 +31,10 @@ footer .q-tab__icon{
 }
 
 .q-toolbar__title{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
+
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/
@@ -89,7 +90,7 @@ footer .q-tab__icon{
 }
 
 .q-drawer--left.q-drawer--bordered{
-  background: #F19240;
+  background: #fc7938;
   border: none;
 }
 
@@ -104,6 +105,7 @@ footer .q-tab__icon{
   color: #fff;
   margin: 6px;
   height: 150px;
+  border-radius: 15px;
   box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
   /* box-shadow: none; */
 }
@@ -157,4 +159,9 @@ footer .q-tab__icon{
   color: #b4b3b3;
   font-size: 14px;
   margin: 20px 0 0 0;
+}
+
+.membro-avatar img{
+  width: 45px;
+  border-radius: 10px;
 }

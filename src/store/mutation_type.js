@@ -2,7 +2,9 @@
 export const SET_DATA_MENU = 'SET_DATA_MENU'
 export const SET_DATA_TAB = 'SET_DATA_TAB'
 export const SET_DATA_NAME = 'SET_DATA_NAME'
+export  const SET_BACK_PAGE = 'SET_BACK_PAGE'
 
+//Generic
 export const GET_DATA = 'GET_DATA'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const GET_DATA_FAILURE = 'GET_DATA_FAILURE'

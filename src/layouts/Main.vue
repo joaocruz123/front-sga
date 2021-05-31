@@ -1,8 +1,13 @@
 <template>
 <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-white text-primary">
+    <q-header class="bg-primary text-white">
         <q-toolbar>
-            <q-btn dense flat round icon="menu" @click="left = !left" />
+            <span v-if="!create">
+                <q-btn dense flat round icon="menu" @click="left = !left" />
+            </span>
+            <span v-else>
+                <q-btn dense flat round icon="arrow_back" @click="$router.push({ name: back })"/>
+            </span>
 
             <q-toolbar-title>
                 {{name_page}}
@@ -57,7 +62,7 @@ export default {
         FooterMain
     },
     computed: {
-        ...mapState("navigation", ["name_page"])
+        ...mapState("navigation", ["name_page", "back", "create"])
     },
     methods: {
         ...mapActions("auth", ["logout"]),
@@ -74,7 +79,7 @@ export default {
                     break;
             }
         });
-    },
+    }
 }
 </script>
 
