@@ -1,6 +1,7 @@
 import axios from './../../plugins/axios'
 import {Loading} from 'quasar'
 import { Notify } from 'quasar'
+import { QSpinnerPuff } from 'quasar'
 
 import {
     GET_DATA,
@@ -11,6 +12,15 @@ import {
     DELETE_SUCCESS
 } from '../mutation_type'
 
+export const LoadingParameters = {
+    spinner: QSpinnerPuff,
+    delay: 0,
+    spinnerColor: 'white',
+    spinnerSize: 60,
+    backgroundColor: 'primary',
+    messageColor: 'white'
+}
+  
 export default {
     namespaced: true,
     state: {
@@ -22,11 +32,13 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
+            Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
             axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
+                /Loading.hide()
                 context.commit('GET_DATA', false)
             }).catch(error => {
                 context.commit('GET_DATA_FAILURE', response.data)
