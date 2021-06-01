@@ -61,7 +61,7 @@
             <q-input type="number" v-model="numero" label="Numero" />
         </div>
 
-         <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6">
             <q-input type="text" v-model="complemento" label="Complemento" />
         </div>
 
@@ -90,15 +90,47 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <q-input type="text" v-model="cargo" label="Cargo na Igreja" />
+            <q-select v-model="atuacao" :options="options_atuacao" label="Atuação na Igreja" />
         </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <q-input v-model="data_conversao" mask="date" label="Data de Conversão">
+                <template v-slot:prepend>
+                    <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                            <q-date v-model="data_conversao" @input="() => $refs.qDateProxy.hide()" />
+                        </q-popup-proxy>
+                    </q-icon>
+                </template>
+            </q-input>
+        </div>
+
         <div class="col-xs-12 col-sm-6">
-            <q-select v-model="sacramentos" :options="options_sacramentos" label="Sacramentos" multiple />
+            <q-file bottom-slots v-model="foto" label="Foto" counter accept=".jpg" @rejected="onRejected">
+                <template v-slot:prepend>
+                    <q-icon name="attach_file" @click.stop />
+                </template>
+                <template v-slot:append>
+                    <q-icon name="close" @click.stop="model = null" class="cursor-pointer" />
+                </template>
+
+                <template v-slot:hint>
+                    *jpg, jpeg
+                </template>
+            </q-file>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-checkbox v-model="batizado" color="primary" label="O membro é batizado?" true-value="sim" false-value="não" />
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-checkbox v-model="afastado" color="primary" label="O membro está afastado?" true-value="sim" false-value="não" />
         </div>
 
     </div>
 
-    <div class="row q-col-gutter-md justify-end q-mt-xl">
+    <div class="row q-col-gutter-md justify-end q-mt-md">
         <div class="col-xs-12 col-sm-3">
             <q-btn color="primary" class="full-width" label="save" icon="save" @click="saveData()" />
         </div>
@@ -108,7 +140,10 @@
 
 <script>
 import axios from './../../plugins/axios'
-import { api, via } from 'boot/axios'
+import {
+    api,
+    via
+} from 'boot/axios'
 
 import {
     mapActions,
@@ -135,8 +170,12 @@ export default {
             estado_civil: '',
             profissao: '',
             endereco_trabalho: '',
-            cargo: '',
-            sacramentos: [],
+            atuacao: '',
+            foto: null,
+            data_conversao: '',
+            batizado: 'não',
+            afastado: 'não',
+            options_atuacao: ['Membro', 'Congregado'],
             options_sexo: ['Masculino', 'Feminino'],
             options_estado_civil: ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'],
             options_tipo_casamento: ['Civil', 'Religioso', 'Civil e Religioso'],
@@ -149,6 +188,15 @@ export default {
     methods: {
         ...mapActions("membros", ["saveMembro", "editMembro", "getMembroDetails"]),
         ...mapActions("navigation", ["setNamePage", "setBackPage", "setCreateData"]),
+
+        onRejected(rejectedEntries) {
+            // Notify plugin needs to be installed
+            // https://quasar.dev/quasar-plugins/notify#Installation
+            this.$q.notify({
+                type: 'negative',
+                message: `file(s) did not pass validation constraints`
+            })
+        },
 
         searchCep() {
             if (this.cep.length === 8) {
@@ -178,20 +226,20 @@ export default {
                 .then(response => {
                     this.nome = response.data.nome
                     this.cpf = response.data.cpf,
-                        this.sexo = response.data.sexo,
-                        this.telefone = response.data.telefone,
-                        this.bairro = response.data.bairro,
-                        this.endereco = response.data.endereco,
-                        this.idade = response.data.idade,
-                        this.email = response.data.email,
-                        this.data_nascimento = response.data.data_nascimento,
-                        this.estado_civil = response.data.estado_civil,
-                        this.data_casamento = response.data.data_casamento,
-                        this.tipo_casamento = response.data.tipo_casamento,
-                        this.nome_conjugue = response.data.nome_conjugue,
-                        this.profissao = response.data.profissao,
-                        this.endereco_trabalho = response.data.endereco,
-                        this.cargo = response.data.cargo
+                    this.sexo = response.data.sexo,
+                    this.telefone = response.data.telefone,
+                    this.bairro = response.data.bairro,
+                    this.endereco = response.data.endereco,
+                    this.idade = response.data.idade,
+                    this.email = response.data.email,
+                    this.data_nascimento = response.data.data_nascimento,
+                    this.estado_civil = response.data.estado_civil,
+                    this.data_casamento = response.data.data_casamento,
+                    this.tipo_casamento = response.data.tipo_casamento,
+                    this.nome_conjugue = response.data.nome_conjugue,
+                    this.profissao = response.data.profissao,
+                    this.endereco_trabalho = response.data.endereco,
+                    this.cargo = response.data.cargo
                 })
                 .catch(e => {
                     console.log(e)
@@ -204,7 +252,12 @@ export default {
                 sexo: this.sexo,
                 telefone: this.telefone,
                 bairro: this.bairro,
+                cep: this.cep,
+                numero: this.numero,
+                complemento: this.complemento,
                 endereco: this.endereco,
+                estado: this.estado,
+                cidade: this.cidade,
                 idade: this.idade,
                 email: this.email,
                 data_nascimento: this.data_nascimento,
@@ -214,8 +267,11 @@ export default {
                 nome_conjugue: this.nome_conjugue,
                 profissao: this.profissao,
                 endereco_trabalho: this.endereco_trabalho,
-                cargo: this.cargo,
-                //sacramentos:this.sacramentos,
+                atuacao: this.atuacao,
+                avatar:this.foto,
+                data_conversao: this.data_conversao,
+                batizado: this.batizado,
+                afastado: this.afastado
             }
 
             if (this.id_membro != 0) {
