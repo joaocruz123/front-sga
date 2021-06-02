@@ -106,21 +106,6 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <q-file bottom-slots v-model="foto" label="Foto" counter accept=".jpg" @rejected="onRejected">
-                <template v-slot:prepend>
-                    <q-icon name="attach_file" @click.stop />
-                </template>
-                <template v-slot:append>
-                    <q-icon name="close" @click.stop="model = null" class="cursor-pointer" />
-                </template>
-
-                <template v-slot:hint>
-                    *jpg, jpeg
-                </template>
-            </q-file>
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
             <q-checkbox v-model="batizado" color="primary" label="O membro é batizado?" true-value="sim" false-value="não" />
         </div>
 
@@ -128,6 +113,13 @@
             <q-checkbox v-model="afastado" color="primary" label="O membro está afastado?" true-value="sim" false-value="não" />
         </div>
 
+        <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Foto</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-input @input="val => { avatar = val[0] }" type="file" hint="*jpg/jpeg" />
+        </div>
     </div>
 
     <div class="row q-col-gutter-md justify-end q-mt-md">
@@ -171,7 +163,7 @@ export default {
             profissao: '',
             endereco_trabalho: '',
             atuacao: '',
-            foto: null,
+            avatar: null,
             data_conversao: '',
             batizado: 'não',
             afastado: 'não',
@@ -188,15 +180,6 @@ export default {
     methods: {
         ...mapActions("membros", ["saveMembro", "editMembro", "getMembroDetails"]),
         ...mapActions("navigation", ["setNamePage", "setBackPage", "setCreateData"]),
-
-        onRejected(rejectedEntries) {
-            // Notify plugin needs to be installed
-            // https://quasar.dev/quasar-plugins/notify#Installation
-            this.$q.notify({
-                type: 'negative',
-                message: `file(s) did not pass validation constraints`
-            })
-        },
 
         searchCep() {
             if (this.cep.length === 8) {
@@ -226,20 +209,20 @@ export default {
                 .then(response => {
                     this.nome = response.data.nome
                     this.cpf = response.data.cpf,
-                    this.sexo = response.data.sexo,
-                    this.telefone = response.data.telefone,
-                    this.bairro = response.data.bairro,
-                    this.endereco = response.data.endereco,
-                    this.idade = response.data.idade,
-                    this.email = response.data.email,
-                    this.data_nascimento = response.data.data_nascimento,
-                    this.estado_civil = response.data.estado_civil,
-                    this.data_casamento = response.data.data_casamento,
-                    this.tipo_casamento = response.data.tipo_casamento,
-                    this.nome_conjugue = response.data.nome_conjugue,
-                    this.profissao = response.data.profissao,
-                    this.endereco_trabalho = response.data.endereco,
-                    this.cargo = response.data.cargo
+                        this.sexo = response.data.sexo,
+                        this.telefone = response.data.telefone,
+                        this.bairro = response.data.bairro,
+                        this.endereco = response.data.endereco,
+                        this.idade = response.data.idade,
+                        this.email = response.data.email,
+                        this.data_nascimento = response.data.data_nascimento,
+                        this.estado_civil = response.data.estado_civil,
+                        this.data_casamento = response.data.data_casamento,
+                        this.tipo_casamento = response.data.tipo_casamento,
+                        this.nome_conjugue = response.data.nome_conjugue,
+                        this.profissao = response.data.profissao,
+                        this.endereco_trabalho = response.data.endereco,
+                        this.cargo = response.data.cargo
                 })
                 .catch(e => {
                     console.log(e)
@@ -258,29 +241,31 @@ export default {
                 endereco: this.endereco,
                 estado: this.estado,
                 cidade: this.cidade,
-                idade: this.idade,
                 email: this.email,
                 data_nascimento: this.data_nascimento,
                 estado_civil: this.estado_civil,
-                data_casamento: this.data_casamento,
-                tipo_casamento: this.tipo_casamento,
-                nome_conjugue: this.nome_conjugue,
                 profissao: this.profissao,
                 endereco_trabalho: this.endereco_trabalho,
                 atuacao: this.atuacao,
-                avatar:this.foto,
+                avatar: this.avatar,
                 data_conversao: this.data_conversao,
                 batizado: this.batizado,
                 afastado: this.afastado
             }
 
+            var form_data = new FormData();
+
+            for (var key in data) {
+                form_data.append(key, data[key]);
+            }
+
             if (this.id_membro != 0) {
-                this.editMembro([this.id_membro, data])
+                this.editMembro([this.id_membro, form_data])
                 this.$router.push({
                     name: 'membros'
                 })
             } else {
-                this.saveMembro(data)
+                this.saveMembro(form_data)
                 this.$router.push({
                     name: 'membros'
                 })
