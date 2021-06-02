@@ -61,7 +61,7 @@
             <q-input type="number" v-model="numero" label="Numero" />
         </div>
 
-         <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6">
             <q-input type="text" v-model="complemento" label="Complemento" />
         </div>
 
@@ -90,15 +90,39 @@
         </div>
 
         <div class="col-xs-12 col-sm-6">
-            <q-input type="text" v-model="cargo" label="Cargo na Igreja" />
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <q-select v-model="sacramentos" :options="options_sacramentos" label="Sacramentos" multiple />
+            <q-select v-model="atuacao" :options="options_atuacao" label="Atuação na Igreja" />
         </div>
 
+        <div class="col-xs-12 col-sm-4">
+            <q-input v-model="data_conversao" mask="date" label="Data de Conversão">
+                <template v-slot:prepend>
+                    <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                            <q-date v-model="data_conversao" @input="() => $refs.qDateProxy.hide()" />
+                        </q-popup-proxy>
+                    </q-icon>
+                </template>
+            </q-input>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-checkbox v-model="batizado" color="primary" label="O membro é batizado?" true-value="sim" false-value="não" />
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-checkbox v-model="afastado" color="primary" label="O membro está afastado?" true-value="sim" false-value="não" />
+        </div>
+
+        <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Foto</div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <q-input @input="val => { avatar = val[0] }" type="file" hint="*jpg/jpeg" />
+        </div>
     </div>
 
-    <div class="row q-col-gutter-md justify-end q-mt-xl">
+    <div class="row q-col-gutter-md justify-end q-mt-md">
         <div class="col-xs-12 col-sm-3">
             <q-btn color="primary" class="full-width" label="save" icon="save" @click="saveData()" />
         </div>
@@ -108,7 +132,10 @@
 
 <script>
 import axios from './../../plugins/axios'
-import { api, via } from 'boot/axios'
+import {
+    api,
+    via
+} from 'boot/axios'
 
 import {
     mapActions,
@@ -135,8 +162,12 @@ export default {
             estado_civil: '',
             profissao: '',
             endereco_trabalho: '',
-            cargo: '',
-            sacramentos: [],
+            atuacao: '',
+            avatar: null,
+            data_conversao: '',
+            batizado: 'não',
+            afastado: 'não',
+            options_atuacao: ['Membro', 'Congregado'],
             options_sexo: ['Masculino', 'Feminino'],
             options_estado_civil: ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'],
             options_tipo_casamento: ['Civil', 'Religioso', 'Civil e Religioso'],
@@ -204,27 +235,37 @@ export default {
                 sexo: this.sexo,
                 telefone: this.telefone,
                 bairro: this.bairro,
+                cep: this.cep,
+                numero: this.numero,
+                complemento: this.complemento,
                 endereco: this.endereco,
-                idade: this.idade,
+                estado: this.estado,
+                cidade: this.cidade,
                 email: this.email,
                 data_nascimento: this.data_nascimento,
                 estado_civil: this.estado_civil,
-                data_casamento: this.data_casamento,
-                tipo_casamento: this.tipo_casamento,
-                nome_conjugue: this.nome_conjugue,
                 profissao: this.profissao,
                 endereco_trabalho: this.endereco_trabalho,
-                cargo: this.cargo,
-                //sacramentos:this.sacramentos,
+                atuacao: this.atuacao,
+                avatar: this.avatar,
+                data_conversao: this.data_conversao,
+                batizado: this.batizado,
+                afastado: this.afastado
+            }
+
+            var form_data = new FormData();
+
+            for (var key in data) {
+                form_data.append(key, data[key]);
             }
 
             if (this.id_membro != 0) {
-                this.editMembro([this.id_membro, data])
+                this.editMembro([this.id_membro, form_data])
                 this.$router.push({
                     name: 'membros'
                 })
             } else {
-                this.saveMembro(data)
+                this.saveMembro(form_data)
                 this.$router.push({
                     name: 'membros'
                 })

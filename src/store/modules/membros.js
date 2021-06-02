@@ -2,6 +2,7 @@ import axios from './../../plugins/axios'
 import {Loading} from 'quasar'
 import { Notify } from 'quasar'
 import { QSpinnerPuff } from 'quasar'
+import { api } from 'boot/axios'
 
 import {
     GET_DATA,
@@ -48,19 +49,25 @@ export default {
         saveMembro(context, data){
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
+            
+            Loading.show(LoadingParameters)
+            context.commit('GET_DATA', true)
 
-            Loading.show()
-            axios.request('post', `/membros`, data, { Authorization: 'Bearer ' + token })
+            axios.request('post', `/membros`, data, { Authorization: 'Bearer ' + token,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }})
             .then(response => {
                 context.commit('CREATE_SUCCESS', response.data)
                 Loading.hide()
+                context.commit('GET_DATA', false)
                 Notify.create({
                     type: 'positive',
                     message: `Novo membro cadastrado com sucesso.`,
                     icon: 'done_all'
                 })
             }).catch(error => {
-                context.commit('GET_DATA_FAILURE', response.data)
+                context.commit('GET_DATA_FAILURE', error)
                 this.error = error
             })
         },

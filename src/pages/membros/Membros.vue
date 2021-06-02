@@ -1,44 +1,10 @@
 <template>
-<q-page>
+<q-page v-if="!isLoading">
     <div class="q-ma-md">
         <p class="subtitle-head">Lista de membros/congregados cadastrados na igreja</p>
     </div>
 
-    <div v-if="isLoading">
-        <Skeleton></Skeleton>
-    </div>
-
-    <!-- <q-table :data="membros" :columns="columns" row-key="name" hide-header v-else>
-        <template v-slot:header="props">
-            <q-tr :props="props">
-                <q-th v-for="col in props.cols" :key="col.name" :props="props">
-                    {{ col.label }}
-                </q-th>
-                <q-th auto-width />
-            </q-tr>
-        </template>
-
-        <template v-slot:body="props">
-            <q-tr :props="props">
-                <q-td v-for="col in props.cols" :key="col.name" :props="props" @click="open(props.row.id)">
-                    <span class="membro-avatar" v-if="col.name === 'avatar'">
-                        <img :src="`http://localhost/uploads/avatars/${col.value}`">
-                    </span>
-                    <span v-else>
-                        <span v-if="col.name === 'afastado'">
-                            <q-badge :color="col.value === 'nao'? 'green' : 'red' ">
-                                {{col.value === 'nao' ? 'Ativo' : 'Inatio'}}
-                            </q-badge>
-                        </span>
-                        <span v-else>{{ col.value }}</span>
-                    </span>
-                </q-td>
-            </q-tr>
-        </template>
-
-    </q-table> -->
-
-    <q-list v-else>
+    <q-list >
         <div v-for="membro in membros" :key="membro.id" >
             <q-item clickable v-ripple @click="open(membro.id)">
                 <q-item-section avatar>
@@ -54,8 +20,8 @@
                 </q-item-section>
 
                 <q-item-section side top>
-                    <q-badge :color="membro.afastado === 'nao'? 'green' : 'red' ">
-                        {{membro.afastado === 'nao' ? 'Ativo' : 'Inatio'}}
+                    <q-badge :color="membro.afastado === 'não'? 'green' : 'red' ">
+                        {{membro.afastado === 'não' ? 'Ativo' : 'Inativo'}}
                     </q-badge>
                 </q-item-section>
             </q-item>
@@ -99,7 +65,7 @@ import {
     mapActions,
     mapState
 } from 'vuex'
-import Skeleton from './../../components/skeleton/SkeletonMembros'
+// import Skeleton from './../../components/skeleton/SkeletonMembros'
 export default {
     name: 'Membros',
     data() {
@@ -136,7 +102,7 @@ export default {
         }
     },
     components: {
-        Skeleton
+        //Skeleton
     },
     computed: {
         ...mapState("membros", ["membros", "isLoading"])
