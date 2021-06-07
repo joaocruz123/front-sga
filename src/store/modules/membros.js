@@ -2,7 +2,6 @@ import axios from './../../plugins/axios'
 import {Loading} from 'quasar'
 import { Notify } from 'quasar'
 import { QSpinnerPuff } from 'quasar'
-import { api } from 'boot/axios'
 
 import {
     GET_DATA,
@@ -33,16 +32,16 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show(LoadingParameters)
+            // Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
             axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
-                /Loading.hide()
+                // Loading.hide()
                 context.commit('GET_DATA', false)
             }).catch(error => {
-                context.commit('GET_DATA_FAILURE', response.data)
+                context.commit('GET_DATA_FAILURE', error.data)
                 this.error = error
             })
         },
@@ -59,15 +58,16 @@ export default {
             }})
             .then(response => {
                 context.commit('CREATE_SUCCESS', response.data)
+                this.$router.push({name: 'membros'})
                 Loading.hide()
                 context.commit('GET_DATA', false)
-                Notify.create({
-                    type: 'positive',
+                this.$q.notify({
+                    color: 'primary',
                     message: `Novo membro cadastrado com sucesso.`,
                     icon: 'done_all'
                 })
             }).catch(error => {
-                context.commit('GET_DATA_FAILURE', error)
+                context.commit('GET_DATA_FAILURE', error.data)
                 this.error = error
             })
         },
@@ -85,7 +85,7 @@ export default {
                 context.commit('EDIT_SUCCESS', response.data)
                 Loading.hide()
                 Notify.create({
-                    type: 'positive',
+                    color: 'primary',
                     message: `Membro editado com sucesso.`,
                     icon: 'edit'
                 })
@@ -119,8 +119,10 @@ export default {
         [GET_DATA](state, payload) {
             state.isLoading = payload
         },
+        [GET_DATA_FAILURE](){},
         [GET_DATA_SUCCESS](state, payload) {
             state.membros = payload.data
+            localStorage.membros = JSON.stringify(payload.data)            
         },
         [CREATE_SUCCESS](state,payload){
 

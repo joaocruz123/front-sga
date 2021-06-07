@@ -1,5 +1,6 @@
 import axios from './../../plugins/axios'
 import {Loading} from 'quasar'
+import { QSpinnerPuff } from 'quasar'
 
 import {
     GET_DATA,
@@ -7,6 +8,15 @@ import {
     LOGOUT_SUCCESS,
     LOGIN_ERROR
 } from '../mutation_type'
+
+export const LoadingParameters = {
+    spinner: QSpinnerPuff,
+    delay: 0,
+    spinnerColor: 'white',
+    spinnerSize: 60,
+    backgroundColor: 'primary',
+    messageColor: 'white'
+}
 
 export default {
     namespaced: true,
@@ -25,12 +35,12 @@ export default {
             let email = params[0]
             let password = params[1]
 
-            Loading.show()
+            Loading.show(LoadingParameters)
             axios.request('post', `/login?email=${email}&password=${password}`, '', { Authorization: ' ' })
                 .then(response => {
                     context.commit('LOGIN_SUCCESS', response.data)
-                    Loading.hide()
                     this.$router.push({path: '/'})
+                    Loading.hide()
                 }).catch(error => {
                     context.commit('LOGIN_ERROR', response.data)
                     Loading.hide()
@@ -40,14 +50,15 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show()
+            Loading.show(LoadingParameters)
             axios.request('post', `/logout`, '', { Authorization: 'Bearer ' + token })
                 .then(response => {
                     context.commit('LOGOUT_SUCCESS', response.data)
-                    Loading.hide()
                     this.$router.push({path: 'login'})
+                    Loading.hide()
                 }).catch(error => {
                     this.error = error
+                    Loading.hide()
                 })
         },
     },

@@ -1,11 +1,11 @@
 <template>
-<q-page v-if="!isLoading">
+<q-page>
     <div class="q-ma-md">
         <p class="subtitle-head">Lista de membros/congregados cadastrados na igreja</p>
     </div>
-
-    <q-list >
-        <div v-for="membro in membros" :key="membro.id" >
+    
+    <q-list>
+        <div v-for="membro in membros" :key="membro.id">
             <q-item clickable v-ripple @click="open(membro.id)">
                 <q-item-section avatar>
                     <span class="membro-avatar">
@@ -27,12 +27,18 @@
             </q-item>
         </div>
     </q-list>
+
+    <q-inner-loading :showing="isLoading">
+        <q-spinner-puff size="50px" color="primary" />
+    </q-inner-loading>
+
     <q-dialog v-model="actions" :position="'bottom'">
         <q-card style="width: 350px; padding: 20px;">
             <q-btn class="full-width" color="primary" style="margin-bottom: 10px;" label="Editar" icon="edit" @click="$router.push({ name: 'membro', params: { id: action_id } })" />
             <q-btn class="full-width" color="negative" label="Excluir" icon="delete" @click="confirmRemove(action_id)" />
         </q-card>
     </q-dialog>
+
     <q-dialog v-model="confirm_remove" persistent transition-show="flip-down" transition-hide="flip-up">
         <q-card>
             <q-bar>
@@ -139,9 +145,11 @@ export default {
 .q-table__container {
     background: none;
 }
-.q-item{
+
+.q-item {
     background: #eeeeee;
     margin: 10px;
     border-radius: 10px;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
 }
 </style>
