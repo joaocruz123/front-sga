@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #4e4e4e;
   background-color: #ffffff;
 }
@@ -39,6 +40,9 @@ footer .q-tab__icon{
   opacity: 1;
 }
 
+.q-inner-loading{
+  background: rgb(255 255 255);
+}
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/

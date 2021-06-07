@@ -261,14 +261,8 @@ export default {
 
             if (this.id_membro != 0) {
                 this.editMembro([this.id_membro, form_data])
-                this.$router.push({
-                    name: 'membros'
-                })
             } else {
                 this.saveMembro(form_data)
-                this.$router.push({
-                    name: 'membros'
-                })
             }
 
         }
