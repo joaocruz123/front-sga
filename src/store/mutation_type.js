@@ -11,8 +11,10 @@ export const GET_DATA_FAILURE = 'GET_DATA_FAILURE'
 export const CREATE_SUCCESS = 'CREATE_SUCCESS'
 export const EDIT_SUCCESS = 'EDIT_SUCCESS'
 export const DELETE_SUCCESS = 'DELETE_SUCCESS'
+export const GET_DATA_ID = 'GET_DATA_ID'
+export const GET_FAILURE_ID = 'GET_FAILURE_ID'
 
-// Mitations Login
+// Mutations Login
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'

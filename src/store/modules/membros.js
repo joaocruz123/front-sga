@@ -9,7 +9,9 @@ import {
     GET_DATA_FAILURE,
     CREATE_SUCCESS,
     EDIT_SUCCESS,
-    DELETE_SUCCESS
+    DELETE_SUCCESS,
+    GET_DATA_ID,
+    GET_FAILURE_ID
 } from '../mutation_type'
 
 export const LoadingParameters = {
@@ -25,23 +27,39 @@ export default {
     namespaced: true,
     state: {
         isLoading: false,
-        membros:[]
+        membros:[],
+        membroId: {}
     },
     actions: {
         getMembros(context) {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            // Loading.show(LoadingParameters)
+            Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
             axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
-                // Loading.hide()
+                Loading.hide()
                 context.commit('GET_DATA', false)
             }).catch(error => {
                 context.commit('GET_DATA_FAILURE', error.data)
+                this.error = error
+            })
+        },
+        async getMembroId(context, id){
+            const obj = JSON.parse(localStorage.access_user)
+            let token = obj.access_token
+
+            Loading.show(LoadingParameters)
+
+            await axios.request('get', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
+            .then(response => {
+                context.commit('GET_DATA_ID', response.data)
+                Loading.hide()
+            }).catch(error => {
+                context.commit('GET_FAILURE_ID', error.data)
                 this.error = error
             })
         },
@@ -120,9 +138,13 @@ export default {
             state.isLoading = payload
         },
         [GET_DATA_FAILURE](){},
+        [GET_FAILURE_ID](){},
         [GET_DATA_SUCCESS](state, payload) {
             state.membros = payload.data
             localStorage.membros = JSON.stringify(payload.data)            
+        },
+        [GET_DATA_ID](state, payload){
+            state.membroId = payload.data
         },
         [CREATE_SUCCESS](state,payload){
 
