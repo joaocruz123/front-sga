@@ -175,10 +175,10 @@ export default {
         }
     },
     computed: {
-        ...mapState("membros", ["membros"]),
+        ...mapState("membros", ["membros", "membroId"]),
     },
     methods: {
-        ...mapActions("membros", ["saveMembro", "editMembro", "getMembroDetails"]),
+        ...mapActions("membros", ["saveMembro", "editMembro", "getMembroDetails", "getMembroId"]),
         ...mapActions("navigation", ["setNamePage", "setBackPage", "setCreateData"]),
 
         searchCep() {
@@ -203,30 +203,15 @@ export default {
             } else return false
         },
         fetchData() {
-            axios.request('get', `/membros/${this.id_membro}`, '', {
-                    token: ''
-                })
-                .then(response => {
-                    this.nome = response.data.nome
-                    this.cpf = response.data.cpf,
-                        this.sexo = response.data.sexo,
-                        this.telefone = response.data.telefone,
-                        this.bairro = response.data.bairro,
-                        this.endereco = response.data.endereco,
-                        this.idade = response.data.idade,
-                        this.email = response.data.email,
-                        this.data_nascimento = response.data.data_nascimento,
-                        this.estado_civil = response.data.estado_civil,
-                        this.data_casamento = response.data.data_casamento,
-                        this.tipo_casamento = response.data.tipo_casamento,
-                        this.nome_conjugue = response.data.nome_conjugue,
-                        this.profissao = response.data.profissao,
-                        this.endereco_trabalho = response.data.endereco,
-                        this.cargo = response.data.cargo
-                })
-                .catch(e => {
-                    console.log(e)
-                })
+            this.getMembroId(this.id_membro).then(() => {
+                this.nome = this.membroId.nome
+                this.cpf = this.membroId.cpf
+                this.sexo = this.membroId.sexo
+                this.telefone = this.membroId.telefone
+                this.email = this.membroId.email
+            }).catch(e => {
+                console.log(e)
+            });
         },
         saveData() {
             let data = {

@@ -3,8 +3,12 @@
     <div class="q-ma-md">
         <p class="subtitle-head">Lista de membros/congregados cadastrados na igreja</p>
     </div>
-    
-    <q-list>
+
+    <div v-if="isLoading">
+        <Skeleton></Skeleton>
+    </div>
+
+    <q-list v-else>
         <div v-for="membro in membros" :key="membro.id">
             <q-item clickable v-ripple @click="open(membro.id)">
                 <q-item-section avatar>
@@ -19,7 +23,7 @@
                     <q-item-label caption lines="2">{{membro.cpf}}</q-item-label>
                 </q-item-section>
 
-                <q-item-section side top>
+                <q-item-section side>
                     <q-badge :color="membro.afastado === 'não'? 'green' : 'red' ">
                         {{membro.afastado === 'não' ? 'Ativo' : 'Inativo'}}
                     </q-badge>
@@ -27,10 +31,6 @@
             </q-item>
         </div>
     </q-list>
-
-    <q-inner-loading :showing="isLoading">
-        <q-spinner-puff size="50px" color="primary" />
-    </q-inner-loading>
 
     <q-dialog v-model="actions" :position="'bottom'">
         <q-card style="width: 350px; padding: 20px;">
@@ -71,7 +71,7 @@ import {
     mapActions,
     mapState
 } from 'vuex'
-// import Skeleton from './../../components/skeleton/SkeletonMembros'
+import Skeleton from './../../components/skeleton/SkeletonMembros'
 export default {
     name: 'Membros',
     data() {
@@ -108,7 +108,7 @@ export default {
         }
     },
     components: {
-        //Skeleton
+        Skeleton
     },
     computed: {
         ...mapState("membros", ["membros", "isLoading"])
