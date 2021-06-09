@@ -209,6 +209,21 @@ export default {
                 this.sexo = this.membroId.sexo
                 this.telefone = this.membroId.telefone
                 this.email = this.membroId.email
+                this.cep = this.membroId.cep
+                this.numero = this.membroId.numero
+                this.complemento = this.membroId.complemento
+                this.endereco = this.membroId.endereco
+                this.estado = this.membroId.estado
+                this.cidade = this.membroId.cidade
+                this.data_nascimento = this.membroId.data_nascimento
+                this.estado_civil = this.membroId.estado_civil
+                this.profissao = this.membroId.profissao
+                this.endereco_trabalho = this.membroId.endereco_trabalho
+                this.atuacao = this.membroId.atuacao
+                this.avatar = this.membroId.avatar
+                this.data_conversao = this.membroId.data_conversao
+                this.batizado = this.membroId.batizado
+                this.afastado = this.membroId.afastado
             }).catch(e => {
                 console.log(e)
             });
