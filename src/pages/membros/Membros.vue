@@ -1,36 +1,37 @@
 <template>
 <q-page>
-    <div class="q-ma-md">
-        <p class="subtitle-head">Lista de membros/congregados cadastrados na igreja</p>
-    </div>
-
     <div v-if="isLoading">
         <Skeleton></Skeleton>
     </div>
 
-    <q-list v-else>
-        <div v-for="membro in membros" :key="membro.id">
-            <q-item clickable v-ripple @click="open(membro.id)">
-                <q-item-section avatar>
-                    <span class="membro-avatar">
-                        <img :src="`http://localhost/uploads/avatars/${membro.avatar}`">
-                    </span>
-                </q-item-section>
-
-                <q-item-section>
-                    <q-item-label lines="1">{{membro.nome}}</q-item-label>
-                    <q-item-label caption lines="2">{{membro.email}}</q-item-label>
-                    <q-item-label caption lines="2">{{membro.cpf}}</q-item-label>
-                </q-item-section>
-
-                <q-item-section side>
-                    <q-badge :color="membro.afastado === 'não'? 'green' : 'red' ">
-                        {{membro.afastado === 'não' ? 'Ativo' : 'Inativo'}}
-                    </q-badge>
-                </q-item-section>
-            </q-item>
+    <div v-else>
+        <div class="q-ma-md">
+            <p class="subtitle-head">Lista de membros/congregados cadastrados na igreja</p>
         </div>
-    </q-list>
+        <q-list>
+            <div v-for="membro in membros" :key="membro.id">
+                <q-item clickable v-ripple @click="open(membro.id)">
+                    <q-item-section avatar>
+                        <span class="membro-avatar">
+                            <img :src="`http://localhost/uploads/avatars/${membro.avatar}`">
+                        </span>
+                    </q-item-section>
+
+                    <q-item-section>
+                        <q-item-label lines="1">{{membro.nome}}</q-item-label>
+                        <q-item-label caption lines="2">{{membro.email}}</q-item-label>
+                        <q-item-label caption lines="2">{{membro.cpf}}</q-item-label>
+                    </q-item-section>
+
+                    <q-item-section side>
+                        <q-badge :color="membro.afastado === 'não'? 'green' : 'red' ">
+                            {{membro.afastado === 'não' ? 'Ativo' : 'Inativo'}}
+                        </q-badge>
+                    </q-item-section>
+                </q-item>
+            </div>
+        </q-list>
+    </div>
 
     <q-dialog v-model="actions" :position="'bottom'">
         <q-card style="width: 350px; padding: 20px;">
