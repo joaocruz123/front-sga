@@ -35,13 +35,13 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show(LoadingParameters)
+            //Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
             axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
-                Loading.hide()
+                //Loading.hide()
                 context.commit('GET_DATA', false)
             }).catch(error => {
                 context.commit('GET_DATA_FAILURE', error.data)

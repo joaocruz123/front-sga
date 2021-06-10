@@ -117,7 +117,22 @@
             <div class="text-h6 h6 text-primary">Foto</div>
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <span v-if="picture_edit">
+            <div class="col-xs-12 col-sm-6">
+                <q-list style="mix-width: 100%">
+                    <q-item clickable v-ripple>
+                        <q-item-section thumbnail>
+                            <img :src="`http://localhost/uploads/avatars/${avatar}`" width="150px">
+                        </q-item-section>
+                        <q-item-section>
+                            <q-btn color="negative" label="Remover Imagem" @click="editPicture()" />
+                        </q-item-section>
+                    </q-item>
+                </q-list>
+            </div>
+        </span>
+
+        <div class="col-xs-12 col-sm-6" v-else>
             <q-input @input="val => { avatar = val[0] }" type="file" hint="*jpg/jpeg" />
         </div>
     </div>
@@ -171,7 +186,8 @@ export default {
             options_sexo: ['Masculino', 'Feminino'],
             options_estado_civil: ['Solteiro(a)', 'Casado(a)', 'Divorciado(a)', 'Viúvo(a)'],
             options_tipo_casamento: ['Civil', 'Religioso', 'Civil e Religioso'],
-            options_sacramentos: ['Batismo', 'Primeira Eucaristia', 'Outros']
+            options_sacramentos: ['Batismo', 'Primeira Eucaristia', 'Outros'],
+            picture_edit: false,
         }
     },
     computed: {
@@ -209,6 +225,22 @@ export default {
                 this.sexo = this.membroId.sexo
                 this.telefone = this.membroId.telefone
                 this.email = this.membroId.email
+                this.cep = this.membroId.cep
+                this.numero = this.membroId.numero
+                this.complemento = this.membroId.complemento
+                this.endereco = this.membroId.endereco
+                this.estado = this.membroId.estado
+                this.cidade = this.membroId.cidade
+                this.data_nascimento = this.membroId.data_nascimento
+                this.estado_civil = this.membroId.estado_civil
+                this.profissao = this.membroId.profissao
+                this.endereco_trabalho = this.membroId.endereco_trabalho
+                this.atuacao = this.membroId.atuacao
+                this.avatar = this.membroId.avatar
+                this.data_conversao = this.membroId.data_conversao
+                this.batizado = this.membroId.batizado
+                this.afastado = this.membroId.afastado
+                this.picture_edit = true
             }).catch(e => {
                 console.log(e)
             });
@@ -250,12 +282,19 @@ export default {
                 this.saveMembro(form_data)
             }
 
+        },
+
+        editPicture() {
+            this.picture_edit = false
         }
     },
 
     created() {
         this.id_membro = this.$route.params.id
-        if (this.id_membro != 0) this.fetchData()
+        if (this.id_membro != 0) {
+            this.fetchData()
+            this.picture_edit = true
+        }
 
         this.setNamePage('Cadastrar Membro')
         this.setBackPage('membros')
@@ -263,3 +302,10 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.q-item__section--thumbnail img {
+    width: 100px;
+    height: 100%;
+}
+</style>
