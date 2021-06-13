@@ -57,6 +57,7 @@ export default {
             await axios.request('get', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_ID', response.data)
+                console.log(response.data)
                 Loading.hide()
             }).catch(error => {
                 context.commit('GET_FAILURE_ID', error.data)
@@ -93,14 +94,18 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show()
+            Loading.show(LoadingParameters)
 
             let id = params[0]
             let data = params[1]
 
-            axios.request('put', `/membros/${id}`, data, { Authorization: 'Bearer ' + token })
+            axios.request('put', `/membros/${id}`, data, {Authorization: 'Bearer ' + token,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }})
             .then(response => {
                 context.commit('EDIT_SUCCESS', response.data)
+                this.$router.push({name: 'membros'})
                 Loading.hide()
                 Notify.create({
                     color: 'primary',
@@ -108,17 +113,17 @@ export default {
                     icon: 'edit'
                 })
             }).catch(error => {
-                context.commit('GET_DATA_FAILURE', response.data)
+                context.commit('GET_DATA_FAILURE', error.data)
                 this.error = error
             })
         },
-        deleteMembros(context, id){
+        async deleteMembros(context, id){
             const obj = JSON.parse(localStorage.access_user)
-            let token = obj.token
+            let token = obj.access_token
 
-            Loading.show()
+            Loading.show(LoadingParameters)
 
-            axios.request('delete', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
+            await axios.request('delete', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('DELETE_SUCCESS', response.data)
                 Loading.hide()
@@ -128,7 +133,7 @@ export default {
                     icon: 'delete_forever'
                 })
             }).catch(error => {
-                context.commit('GET_DATA_FAILURE', response.data)
+                context.commit('GET_DATA_FAILURE', error.data)
                 this.error = error
             })
         }

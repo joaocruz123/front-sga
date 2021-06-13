@@ -179,6 +179,7 @@ export default {
             endereco_trabalho: '',
             atuacao: '',
             avatar: null,
+            picture: null,
             data_conversao: '',
             batizado: 'não',
             afastado: 'não',
@@ -241,6 +242,7 @@ export default {
                 this.batizado = this.membroId.batizado
                 this.afastado = this.membroId.afastado
                 this.picture_edit = true
+                // this.picture =  this.membroId.avatar
             }).catch(e => {
                 console.log(e)
             });
