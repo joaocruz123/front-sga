@@ -124,9 +124,13 @@ export default {
         },
 
         removeItem() {
-            this.deleteMembros(this.action_id)
+            this.deleteMembros(this.action_id).then(() => {
+                this.getMembros()
+            }).catch(e => {
+                console.log(e)
+            })
             this.confirm_remove = false
-            this.getMembros()
+            this.actions = false
         },
 
         open(id) {
