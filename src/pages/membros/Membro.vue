@@ -228,6 +228,7 @@ export default {
                 this.email = this.membroId.email
                 this.cep = this.membroId.cep
                 this.numero = this.membroId.numero
+                this.bairro = this.membroId.bairro
                 this.complemento = this.membroId.complemento
                 this.endereco = this.membroId.endereco
                 this.estado = this.membroId.estado
@@ -275,7 +276,11 @@ export default {
             var form_data = new FormData();
 
             for (var key in data) {
-                form_data.append(key, data[key]);
+                if(data[key] === null){
+                    form_data.append(key, '');
+                }else{
+                    form_data.append(key, data[key]);
+                }    
             }
 
             if (this.id_membro != 0) {
