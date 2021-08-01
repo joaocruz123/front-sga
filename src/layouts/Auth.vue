@@ -18,6 +18,6 @@ export default {
 </script>
 <style>
 .background{
-  background: #f2844e;
+  background: #fafafa;
 }
 </style>
