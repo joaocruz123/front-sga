@@ -70,14 +70,15 @@ footer .q-tab__icon{
 # Menu
 --------------------------------------------------------------*/
 .text-menu {
-  color: #ffffff;
+  color: #727272;
 }
 
-.text-menu a{
+.text-menu a:hover{
   color: #ffffff;
 }
 
 .box-user{
+  background: #f2844e ;
   padding: 40px 20px 10px 20px;
 }
 
@@ -87,7 +88,7 @@ footer .q-tab__icon{
 }
 
 .box-user .nome{
-  color:#fff;
+  color:#ffffff;
   font-size: 18px;
   margin: 10px 0 0 0;
 }
@@ -95,11 +96,6 @@ footer .q-tab__icon{
 .box-user .atuacao{
   color: #353535;  
   margin: 2px 0 0 0;
-}
-
-.q-drawer--left.q-drawer--bordered{
-  background: #f2844e;
-  border: none;
 }
 
 /*--------------------------------------------------------------
@@ -112,9 +108,6 @@ footer .q-tab__icon{
 .card{
   color: #fff;
   margin: 6px;
-  height: 170px;
-  width: 120px;
-  border-radius: 15px;
   box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
   /* box-shadow: none; */
 }

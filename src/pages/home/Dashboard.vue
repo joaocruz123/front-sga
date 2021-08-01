@@ -15,6 +15,7 @@
             </div>
         </q-card-section>
     </q-card>
+    
     <q-card class="card bg-purple-4">
         <q-card-section>
             <div class="row">
@@ -24,7 +25,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="text-subtitle2">Pastores</div>
                 </div>
-                <div class="col-xs-8 col-sm-4">
+                <div class="col-xs-12 col-sm-4">
                     <p class="contador">20</p>
                 </div>
             </div>
@@ -39,7 +40,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="text-subtitle2">Batizados</div>
                 </div>
-                <div class="col-xs-8 col-sm-4">
+                <div class="col-xs-12 col-sm-12">
                     <p class="contador">49</p>
                 </div>
             </div>
@@ -54,7 +55,7 @@
                 <div class="col-xs-12 col-sm-12">
                     <div class="text-subtitle2">Celulas</div>
                 </div>
-                <div class="col-xs-8 col-sm-4">
+                <div class="col-xs-12 col-sm-12">
                     <p class="contador">9</p>
                 </div>
             </div>

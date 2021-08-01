@@ -1,12 +1,6 @@
 <template>
 <div>
-    <div class="box-user text-center">
-        <q-img src="~assets/img/avatar_sga.png" />
-        <div class="nome">João Paulo Franco da Cruz</div>
-        <div class="atuacao">Membro</div>
-    </div>
-
-    <q-list bordered padding class="rounded-borders text-menu">
+    <q-list padding class="rounded-borders text-menu">
         <q-item clickable v-ripple :active="selected_menu === 'home'" @click="setMenuActive('home')" active-class="active-link" to="/">
             <q-item-section avatar>
                 <q-icon name="home" />
