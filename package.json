@@ -9,14 +9,16 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
-    "vue": "^2.6.12",
     "quasar": "^1.0.0",
-    "vue-axios-cors": "^1.0.1"
+    "vue": "^2.6.12",
+    "vue-axios-cors": "^1.0.1",
+    "vue-sidebar-menu": "^4.8.1"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0"

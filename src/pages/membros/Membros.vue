@@ -5,12 +5,12 @@
     </div>
 
     <div v-else>
-        <div class="q-pa-md">
+        <div class="q-pa-xl">
             <div class="text-h4 h4 text-primary q-mb-lg">
                 <q-icon name="assignment_ind" class="q-mb-sm" /> Membros
             </div>
 
-            <q-table :data="membros" :columns="columns" row-key="name">
+            <q-table :data="membros" :columns="columns" row-key="name" color="primary"  card-class="bg-grey-11 text-black">
                 <template v-slot:top>
                     <div class="col" />
                     <q-btn color="secondary" icon="add" label="new" @click="$router.push({ name: 'membro', params: { id: 0 } })" />
@@ -36,7 +36,7 @@
                             <div v-if="col.name === 'afastado'">
                                 {{ col.value }}
                             </div>
-                            <div v-else>
+                            <div v-if="col.name !== 'avatar' && col.name !== 'afastado'">
                                 {{ col.value }}
                             </div>
                         </q-td>
