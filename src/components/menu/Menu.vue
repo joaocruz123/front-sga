@@ -35,6 +35,7 @@
           :active="selected_menu === 'cargos'"
           @click="setMenuActive('cargos')"
           active-class="my-menu-link"
+          to="cargos"
         >
           <q-item-section>Cargos</q-item-section>
         </q-item>

@@ -7,22 +7,17 @@
     <div v-else>
       <div class="q-pa-lg">
         <div class="text-h4 h4 text-primary q-mb-lg">
-          <q-icon name="assignment_ind" class="q-mb-sm" /> Membros
+          <q-icon name="assignment_ind" class="q-mb-sm" /> Cargos
         </div>
 
         <q-table
-          :data="membros"
+          :data="cargos"
           :columns="columns"
           row-key="name"
           bordered
           color="primary"
           card-class="bg-grey-11 text-black"
         >
-          <!-- <template v-slot:top>
-                    <div class="col" />
-                    <q-btn color="secondary" icon="add" label="new" @click="$router.push({ name: 'membro', params: { id: 0 } })" />
-                </template> -->
-
           <template v-slot:header="props">
             <q-tr :props="props">
               <q-th v-for="col in props.cols" :key="col.name" :props="props">
@@ -35,23 +30,15 @@
           <template v-slot:body="props">
             <q-tr :props="props">
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                <div v-if="col.name === 'avatar'">
-                  <q-avatar>
-                    <img :src="`http://localhost/uploads/avatars/${col.value}`" />
-                  </q-avatar>
-                </div>
-                <div v-if="col.name === 'afastado'">
-                  <div v-if="col.value === 'não'">
-                    <q-badge color="red"> Não </q-badge>
+                <div v-if="col.name === 'ativo'">
+                  <div v-if="col.value === '0'">
+                    <q-badge color="red"> Inativo </q-badge>
                   </div>
-                  <div v-if="col.value === 'null'">
-                    <q-badge color="red"> Não </q-badge>
-                  </div>
-                  <div v-if="col.value === 'sim'">
-                    <q-badge color="green"> Sim </q-badge>
+                  <div v-if="col.value === '1'">
+                    <q-badge color="green"> Ativo </q-badge>
                   </div>
                 </div>
-                <div v-if="col.name !== 'avatar' && col.name !== 'afastado'">
+                <div v-if="col.name !== 'ativo'">
                   {{ col.value }}
                 </div>
               </q-td>
@@ -61,7 +48,7 @@
                   round
                   color="secondary"
                   icon="edit"
-                  @click="$router.push({ name: 'membro', params: { id: props.row.id } })"
+                  @click="$router.push({ name: 'cargo', params: { id: props.row.id } })"
                 />
                 <q-btn
                   flat
@@ -110,7 +97,7 @@
           style="margin-bottom: 10px"
           label="Editar"
           icon="edit"
-          @click="$router.push({ name: 'membro', params: { id: action_id } })"
+          @click="$router.push({ name: 'cargo', params: { id: action_id } })"
         />
         <q-btn
           class="full-width"
@@ -152,7 +139,7 @@
         round
         color="secondary"
         icon="add"
-        @click="$router.push({ name: 'membro', params: { id: 0 } })"
+        @click="$router.push({ name: 'cargo', params: { id: 0 } })"
       />
     </q-page-sticky>
   </q-page>
@@ -169,14 +156,6 @@ export default {
       filter: "",
       columns: [
         {
-          name: "avatar",
-          required: true,
-          label: "",
-          align: "left",
-          field: "avatar",
-          sortable: true,
-        },
-        {
           name: "nome",
           align: "left",
           label: "Nome",
@@ -185,18 +164,18 @@ export default {
           sortable: true,
         },
         {
-          name: "cpf",
+          name: "descricao",
           align: "left",
-          label: "CPF",
-          field: (row) => row.cpf,
+          label: "Descricao",
+          field: (row) => row.descricao,
           format: (val) => `${val}`,
           sortable: false,
         },
         {
-          name: "afastado",
+          name: "ativo",
           align: "left",
-          label: "Afastado?",
-          field: (row) => row.afastado,
+          label: "Status",
+          field: (row) => row.ativo,
           format: (val) => `${val}`,
           sortable: true,
         },
@@ -209,10 +188,10 @@ export default {
     Skeleton,
   },
   computed: {
-    ...mapState("membros", ["membros", "isLoading"]),
+    ...mapState("cargos", ["cargos", "isLoading"]),
   },
   methods: {
-    ...mapActions("membros", ["getMembros", "deleteMembros"]),
+    ...mapActions("cargos", ["getCargos", "deleteCargos"]),
     ...mapActions("navigation", ["setNamePage", "setCreateData"]),
 
     confirmRemove(id) {
@@ -221,9 +200,9 @@ export default {
     },
 
     removeItem() {
-      this.deleteMembros(this.action_id)
+      this.deleteCargos(this.action_id)
         .then(() => {
-          this.getMembros();
+          this.getCargos();
         })
         .catch((e) => {
           console.log(e);
@@ -238,9 +217,9 @@ export default {
     },
   },
   created() {
-    this.setNamePage("Membros");
+    this.setNamePage("Cargos");
     this.setCreateData(false);
-    this.getMembros();
+    this.getCargos();
   },
 };
 </script>
