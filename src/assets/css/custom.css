@@ -47,7 +47,7 @@ footer .q-tab__icon{
 # Login
 --------------------------------------------------------------*/
 .box {
-    width: 600px;
+    width: 450px;
     height: 440px;
     /* background-color: #c9c9c9; */
     border-radius: 4px;
@@ -59,7 +59,7 @@ footer .q-tab__icon{
 
 .box .col-xs-12 p{
   font-size: 12px;
-  color: #824d27
+  color: #f2844e
 }
 
 .box .q-field__label{
@@ -70,14 +70,15 @@ footer .q-tab__icon{
 # Menu
 --------------------------------------------------------------*/
 .text-menu {
-  color: #ffffff;
+  color: #727272;
 }
 
-.text-menu a{
-  color: #ffffff;
+.text-menu a:hover{
+  color: #d66f16;
 }
 
 .box-user{
+  background: #f2844e ;
   padding: 40px 20px 10px 20px;
 }
 
@@ -87,7 +88,7 @@ footer .q-tab__icon{
 }
 
 .box-user .nome{
-  color:#fff;
+  color:#ffffff;
   font-size: 18px;
   margin: 10px 0 0 0;
 }
@@ -97,9 +98,80 @@ footer .q-tab__icon{
   margin: 2px 0 0 0;
 }
 
-.q-drawer--left.q-drawer--bordered{
+
+.v-sidebar-menu {
   background: #f2844e;
-  border: none;
+  top: 50px;
+}
+.v-sidebar-menu.vsm_expanded {
+  background: #f2844e;
+  top: 50px;
+}
+.v-sidebar-menu.vsm_collapsed {
+  background: #f2844e;
+  top: 50px;
+}
+.v-sidebar-menu.vsm_rtl {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--item {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--item.vsm--item_open {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--link {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--link.vsm--link_active {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--link.vsm--link_exact-active {
+  background: #d66f16;
+}
+.v-sidebar-menu .vsm--link.vsm--link_mobile-item {
+  background: #d66f16;
+}
+.v-sidebar-menu .vsm--link.vsm--link_level-[n] {
+  background: #d66f16;
+}
+.v-sidebar-menu .vsm--link.vsm--link_disabled {
+  background: #fff;
+}
+.v-sidebar-menu .vsm--title {}
+.v-sidebar-menu .vsm--icon {
+  background: #d66f16;
+}
+.v-sidebar-menu .vsm--arrow {}
+.v-sidebar-menu .vsm--arrow.vsm--arrow_open {
+  background: #d66f16;
+}
+.v-sidebar-menu .vsm--badge {}
+.v-sidebar-menu .vsm--header {}
+.v-sidebar-menu .vsm--list {
+  background: #fff;
+}
+.v-sidebar-menu .vsm--dropdown>.vsm--list {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--mobile-item {
+  background: #fff;
+}
+.v-sidebar-menu .vsm--mobile-bg {
+  background: #fff;
+}
+.v-sidebar-menu .vsm--toggle-btn {
+  background: #f2844e;
+}
+.v-sidebar-menu .vsm--link_level-1 .vsm--icon {
+  background-color: #d66f16 !important;
+}
+
+.v-sidebar-menu .vsm--link_level-1.vsm--link_exact-active, .v-sidebar-menu .vsm--link_level-1.vsm--link_active{
+  box-shadow: none !important;
+}
+.v-sidebar-menu .vsm--link_hover, .v-sidebar-menu .vsm--link:hover {
+  background-color: #b45706 !important;
 }
 
 /*--------------------------------------------------------------
@@ -112,9 +184,6 @@ footer .q-tab__icon{
 .card{
   color: #fff;
   margin: 6px;
-  height: 170px;
-  width: 120px;
-  border-radius: 15px;
   box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
   /* box-shadow: none; */
 }

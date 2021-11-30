@@ -1,5 +1,5 @@
 <template>
-<div class="q-pa-xl">
+<div class="q-pa-lg">
     <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-sm-12">
             <div class="text-h6 h6 text-primary">Dados Pessoais</div>
