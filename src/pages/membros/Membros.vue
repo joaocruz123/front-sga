@@ -175,7 +175,7 @@
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-btn
         round
-        color="secondary"
+        color="primary"
         icon="add"
         @click="$router.push({ name: 'membro', params: { id: 0 } })"
       />

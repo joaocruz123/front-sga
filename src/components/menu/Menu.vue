@@ -156,6 +156,11 @@ export default {
 <style>
 .my-menu-link {
   color: #fff;
-  background: #d66f16;
+  background: #b1b4b4;
+}
+
+.my-menu-link:hover {
+  color: #fff;
+  background: #b1b4b4;
 }
 </style>
