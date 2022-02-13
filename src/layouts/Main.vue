@@ -1,23 +1,14 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg-primary text-white header-home">
       <q-toolbar>
-        <span v-if="!create">
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        </span>
-        <span v-else>
-          <q-btn
-            dense
-            flat
-            round
-            icon="arrow_back"
-            @click="$router.push({ name: back })"
-          />
-        </span>
+          <!-- <q-btn flat @click="drawer = !drawer" round dense icon="menu" /> -->
 
-        <q-toolbar-title>
-          {{ name_page }}
-        </q-toolbar-title>
+        <q-toolbar-title> Sistema de Gestão Administrativa </q-toolbar-title>
+
+        <q-btn dense flat round icon="notifications" />
+        <q-btn dense flat round icon="share" />
+        <q-btn dense flat round icon="exit_to_app" @click="exit_app = true" />
       </q-toolbar>
     </q-header>
 
@@ -26,14 +17,14 @@
       show-if-above
       :mini="!drawer || miniState"
       @click.capture="drawerClick"
-      :width="300"
+      :width="260"
       :breakpoint="500"
       bordered
       class="primary"
     >
       <Menu />
 
-      <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
+      <div class="q-mini-drawer-hide absolute" style="bottom: 15px; right: -17px">
         <q-btn
           dense
           round
@@ -46,7 +37,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+        <router-view />
     </q-page-container>
 
     <q-dialog v-model="exit_app" persistent>
@@ -59,7 +50,13 @@
 
         <q-card-actions align="right">
           <q-btn flat label="Cancelar" color="primary" v-close-popup />
-          <q-btn flat label="Sair" @click="logout()" color="negative" v-close-popup />
+          <q-btn
+            flat
+            label="Sair"
+            @click="logout()"
+            color="negative"
+            v-close-popup
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -69,14 +66,15 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import Menu from "./../components/menu/Menu";
-import FooterMain from "./../components/menu/FooterMain";
-import { ref } from "vue";
+import FooterHome from "./../components/menu/FooterHome";
+import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 let unsubscribe;
 
 export default {
   name: "Main",
   data() {
     return {
+      path: "",
       user: "",
       left: false,
       exit_app: false,
@@ -86,15 +84,19 @@ export default {
   },
   components: {
     Menu,
-    FooterMain,
+    FooterHome,
+  },
+  created() {
+    this.setNamePage("Dashboard");
   },
   computed: {
-    ...mapState("navigation", ["name_page", "back", "create"]),
+    ...mapState("navigation", ["name_page"]),
   },
   methods: {
     ...mapActions("auth", ["logout"]),
+    ...mapActions("navigation", ["setNamePage"]),
 
-    drawerClick(e) {
+     drawerClick(e) {
       if (this.miniState) {
         this.miniState = false;
         e.stopPropagation();
@@ -117,14 +119,20 @@ export default {
 };
 </script>
 
-<style scoped>
-.header-home {
-  height: 170px;
+<style>
+#view {
+  padding-left: 350px;
+}
+#view.collapsed {
+  padding-left: 50px;
 }
 
-.footer-header {
-  border-radius: 25px 25px 0 0;
-  background: #fff;
-  height: 25px;
+.sidebar.v-sidebar-menu .vsm-arrow:after {
+  content: "\f07e";
+  font-family: FontAwesome;
+}
+.sidebar.v-sidebar-menu .collapse-btn:after {
+  content: "\f07e";
+  font-family: FontAwesome;
 }
 </style>

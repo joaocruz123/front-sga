@@ -25,7 +25,7 @@
                 <q-btn class="full-width" label="Login" color="primary" @click="login([form.username, form.password])" />
             </div>
             <div class="col-xs-12 col-sm-12 flex flex-center">
-                <p color="deep-orange-6">Ainda não é cadastrado? <strong>Clique aqui!</strong></p>
+                <p>Ainda não é cadastrado? <strong>Clique aqui!</strong></p>
             </div>
         </div>
     </div>

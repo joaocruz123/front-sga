@@ -5,12 +5,12 @@
             <div class="text-h6 h6 text-primary">Dados Pessoais</div>
         </div>
 
-        <div class="col-xs-12 col-sm-12">
-            <q-input type="text" v-model="nome" label="Nome" required />
+        <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="nome" label="Nome Completo" required />
         </div>
 
-        <div class="col-xs-12 col-sm-4">
-            <q-input type="number" v-model="cpf" label="CPF" required />
+        <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="cpf" label="CPF" required />
         </div>
 
         <div class="col-xs-12 col-sm-4">
@@ -25,7 +25,7 @@
             <q-input type="text" v-model="email" label="Email" />
         </div>
 
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6">
             <q-input v-model="data_nascimento" mask="date" label="Data de Nascimento">
                 <template v-slot:prepend>
                     <q-icon name="event" class="cursor-pointer">
@@ -49,7 +49,7 @@
             <q-input type="number" v-model="cep" label="Cep" @blur="searchCep()" />
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-8">
             <q-input type="text" v-model="endereco" label="Endereco" />
         </div>
 
@@ -93,7 +93,7 @@
             <q-select v-model="atuacao" :options="options_atuacao" label="Atuação na Igreja" />
         </div>
 
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-12 col-sm-6">
             <q-input v-model="data_conversao" mask="date" label="Data de Conversão">
                 <template v-slot:prepend>
                     <q-icon name="event" class="cursor-pointer">
