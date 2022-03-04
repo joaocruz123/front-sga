@@ -21,7 +21,9 @@ module.exports = function (/* ctx */) {
       
       'axios',
       'cors',
-      'vuemenu'
+      'vuemenu',
+      'vuelidate',
+      'vmask'
       //'bootstrapvue'
     ],
 

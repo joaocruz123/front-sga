@@ -47,6 +47,9 @@
                       />
                     </q-avatar>
                   </div>
+                  <div v-if="col.name === 'cpf'">
+                    {{ col.value | VMask("###.###.###-##") }}
+                  </div>
                   <div v-if="col.name === 'afastado'">
                     <div v-if="col.value === 'não'">
                       <q-badge color="red"> Não </q-badge>
@@ -58,7 +61,13 @@
                       <q-badge color="green"> Sim </q-badge>
                     </div>
                   </div>
-                  <div v-if="col.name !== 'avatar' && col.name !== 'afastado'">
+                  <div
+                    v-if="
+                      col.name !== 'avatar' &&
+                      col.name !== 'afastado' &&
+                      col.name !== 'cpf'
+                    "
+                  >
                     {{ col.value }}
                   </div>
                 </q-td>
