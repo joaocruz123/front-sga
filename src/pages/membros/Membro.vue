@@ -64,9 +64,6 @@
           v-model.trim="$v.email.$model"
           :error="$v.email.error"
         />
-        <!-- <div class="text-red required-alert" v-if="$v.email.$error">
-          O campo é requerido
-        </div> -->
         <div class="text-red required-alert" v-if="$v.email.error">
           Não é um e-mail válido
         </div>

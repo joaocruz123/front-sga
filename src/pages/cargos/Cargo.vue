@@ -84,7 +84,7 @@ export default {
       let data = {
         nome: this.nome,
         descricao: this.descricao,
-        ativo: this.ativo,
+        ativo: this.ativo.value,
       };
 
       if (this.id_cargo != 0) {

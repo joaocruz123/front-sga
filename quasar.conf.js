@@ -23,7 +23,8 @@ module.exports = function (/* ctx */) {
       'cors',
       'vuemenu',
       'vuelidate',
-      'vmask'
+      'vmask',
+      'firebase'
       //'bootstrapvue'
     ],
 
