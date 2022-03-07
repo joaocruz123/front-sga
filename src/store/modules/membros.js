@@ -11,7 +11,7 @@ import {
     EDIT_SUCCESS,
     DELETE_SUCCESS,
     GET_DATA_ID,
-    GET_FAILURE_ID
+    GET_FAILURE_ID,
 } from '../mutation_type'
 
 export const LoadingParameters = {
@@ -80,7 +80,7 @@ export default {
                 this.$router.push({name: 'membros'})
                 Loading.hide()
                 context.commit('GET_DATA', false)
-                this.$q.notify({
+                Notify.create({
                     color: 'primary',
                     message: `Novo membro cadastrado com sucesso.`,
                     icon: 'done_all'
@@ -151,14 +151,8 @@ export default {
         [GET_DATA_ID](state, payload){
             state.membroId = payload.data
         },
-        [CREATE_SUCCESS](state,payload){
-
-        },
-        [EDIT_SUCCESS](state,payload){
-
-        },
-        [DELETE_SUCCESS](state,payload){
-
-        },
+        [CREATE_SUCCESS](state,payload){},
+        [EDIT_SUCCESS](state,payload){},
+        [DELETE_SUCCESS](state,payload){},
     }
 }

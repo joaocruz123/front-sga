@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-primary text-white header-home">
       <q-toolbar>
-          <!-- <q-btn flat @click="drawer = !drawer" round dense icon="menu" /> -->
+        <!-- <q-btn flat @click="drawer = !drawer" round dense icon="menu" /> -->
 
         <q-toolbar-title> Sistema de Gestão Administrativa </q-toolbar-title>
 
@@ -24,7 +24,10 @@
     >
       <Menu />
 
-      <div class="q-mini-drawer-hide absolute" style="bottom: 15px; right: -17px">
+      <div
+        class="q-mini-drawer-hide absolute"
+        style="bottom: 15px; right: -17px"
+      >
         <q-btn
           dense
           round
@@ -37,7 +40,7 @@
     </q-drawer>
 
     <q-page-container>
-        <router-view />
+      <router-view />
     </q-page-container>
 
     <q-dialog v-model="exit_app" persistent>
@@ -96,7 +99,7 @@ export default {
     ...mapActions("auth", ["logout"]),
     ...mapActions("navigation", ["setNamePage"]),
 
-     drawerClick(e) {
+    drawerClick(e) {
       if (this.miniState) {
         this.miniState = false;
         e.stopPropagation();

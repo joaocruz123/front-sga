@@ -24,7 +24,7 @@ module.exports = function (/* ctx */) {
       'vuemenu',
       'vuelidate',
       'vmask',
-      'firebase'
+      'firebase',
       //'bootstrapvue'
     ],
 
@@ -101,7 +101,8 @@ module.exports = function (/* ctx */) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'LoadingBar'
       ]
     },
 
