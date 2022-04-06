@@ -95,6 +95,9 @@
               </q-tr>
             </template>
           </q-table>
+          <div class="q-pa-lg flex flex-center">
+            <q-pagination v-model="current_page" :max="last_page" direction-links @click="getPage()"/>
+          </div>
         </div>
         <q-dialog
           v-model="confirm_remove"
@@ -186,7 +189,7 @@
         round
         color="primary"
         icon="add"
-        @click="$router.push({ name: 'membro', params: { id: 0 } })"
+        @click="$router.push({ name: 'membro', params: { id: '0' } })"
       />
     </q-page-sticky>
   </q-page>
@@ -237,13 +240,14 @@ export default {
       ],
       action_id: "",
       confirm_remove: false,
+      current_page: 1,
     };
   },
   components: {
     Skeleton,
   },
   computed: {
-    ...mapState("membros", ["membros", "isLoading"]),
+    ...mapState("membros", ["membros", "isLoading", "total", "last_page"]),
   },
   methods: {
     ...mapActions("membros", ["getMembros", "deleteMembros"]),
@@ -253,11 +257,10 @@ export default {
       this.action_id = id;
       this.confirm_remove = true;
     },
-
     removeItem() {
       this.deleteMembros(this.action_id)
         .then(() => {
-          this.getMembros();
+          this.getMembros(this.current_page);
         })
         .catch((e) => {
           console.log(e);
@@ -265,7 +268,9 @@ export default {
       this.confirm_remove = false;
       this.actions = false;
     },
-
+    getPage() {
+      this.getMembros(this.current_page);
+    },
     open(id) {
       this.action_id = id;
       this.actions = true;

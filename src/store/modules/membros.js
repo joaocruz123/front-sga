@@ -28,17 +28,19 @@ export default {
     state: {
         isLoading: false,
         membros:[],
-        membroId: {}
+        membroId: {},
+        total: 1,
+        last_page: 1
     },
     actions: {
-        getMembros(context) {
+        getMembros(context, page) {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
             //Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
-            axios.request('get', `/membros`, '', { Authorization: 'Bearer ' + token })
+            axios.request('get', `/membros?page=${page}`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
                 context.commit('GET_DATA_SUCCESS', response.data)
                 //Loading.hide()
@@ -52,7 +54,7 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show(LoadingParameters)
+            //Loading.show(LoadingParameters)
 
             await axios.request('get', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
@@ -68,7 +70,7 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
             
-            Loading.show(LoadingParameters)
+            //Loading.show(LoadingParameters)
             context.commit('GET_DATA', true)
 
             axios.request('post', `/membros`, data, { Authorization: 'Bearer ' + token,
@@ -94,7 +96,7 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show(LoadingParameters)
+            L//oading.show(LoadingParameters)
 
             let id = params[0]
             let data = params[1]
@@ -121,7 +123,7 @@ export default {
             const obj = JSON.parse(localStorage.access_user)
             let token = obj.access_token
 
-            Loading.show(LoadingParameters)
+            //Loading.show(LoadingParameters)
 
             await axios.request('delete', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
             .then(response => {
@@ -145,8 +147,10 @@ export default {
         [GET_DATA_FAILURE](){},
         [GET_FAILURE_ID](){},
         [GET_DATA_SUCCESS](state, payload) {
-            state.membros = payload.data
-            localStorage.membros = JSON.stringify(payload.data)            
+            state.membros = payload.data.data
+            state.total = payload.data.total
+            state.last_page = payload.data.last_page
+            localStorage.membros = JSON.stringify(payload.data.data)            
         },
         [GET_DATA_ID](state, payload){
             state.membroId = payload.data

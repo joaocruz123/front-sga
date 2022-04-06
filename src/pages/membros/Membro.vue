@@ -455,7 +455,7 @@ export default {
 
   created() {
     this.id_membro = this.$route.params.id;
-    if (this.id_membro != 0) {
+    if (this.id_membro > 0) {
       this.fetchData();
       this.picture_edit = true;
     }
