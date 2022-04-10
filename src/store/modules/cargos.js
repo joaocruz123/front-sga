@@ -20,7 +20,6 @@ export const LoadingParameters = {
     delay: 0,
     spinnerColor: 'white',
     spinnerSize: 60,
-    backgroundColor: 'primary',
     messageColor: 'white'
 }
 
@@ -35,7 +34,9 @@ export default {
     state: {
         isLoading: true,
         cargos: [],
-        cargoId: {}
+        cargoId: {},
+        total: 1,
+        last_page: 1
     },
     actions: {
         getCargos(context) {
@@ -78,7 +79,7 @@ export default {
             axios.request('post', `/cargos`, data, { Authorization: 'Bearer ' + token })
                 .then(response => {
                     LoadingBar.stop()
-                    
+
                     context.commit('CREATE_SUCCESS', response.data)
                     this.$router.push({ name: 'cargos' })
                     Notify.create({
@@ -146,8 +147,10 @@ export default {
         [GET_DATA_FAILURE]() { },
         [GET_FAILURE_ID]() { },
         [GET_DATA_SUCCESS](state, payload) {
-            state.cargos = payload.data
-            localStorage.cargos = JSON.stringify(payload.data)
+            state.cargos = payload.data.data
+            state.total = payload.data.total
+            state.last_page = payload.data.last_page
+            localStorage.cargos = JSON.stringify(payload.data.data)
         },
         [GET_DATA_ID](state, payload) {
             state.cargoId = payload.data

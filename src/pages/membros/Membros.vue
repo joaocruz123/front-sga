@@ -27,6 +27,7 @@
             bordered
             color="primary"
             card-class="bg-grey-11 text-black"
+            hide-bottom
           >
             <template v-slot:header="props">
               <q-tr :props="props">
@@ -96,7 +97,12 @@
             </template>
           </q-table>
           <div class="q-pa-lg flex flex-center">
-            <q-pagination v-model="current_page" :max="last_page" direction-links @click="getPage()"/>
+            <q-pagination
+              v-model="current_page"
+              :max="last_page"
+              direction-links
+              @click="getPage()"
+            />
           </div>
         </div>
         <q-dialog
@@ -189,12 +195,11 @@
         round
         color="primary"
         icon="add"
-        @click="$router.push({ name: 'membro', params: { id: '0' } })"
+        @click="$router.push({ name: 'membro', params: { id: 'create' } })"
       />
     </q-page-sticky>
   </q-page>
 </template>
-
 <script>
 import { mapActions, mapState } from "vuex";
 import Skeleton from "./../../components/skeleton/SkeletonMembros";
@@ -279,7 +284,7 @@ export default {
   created() {
     this.setNamePage("Membros");
     this.setCreateData(false);
-    this.getMembros();
+    this.getMembros(this.current_page);
   },
 };
 </script>

@@ -1,255 +1,271 @@
 <template>
-  <div class="q-pa-xl">
-    <div class="text-h4 h4 text-primary q-mb-xl">
-      <q-icon name="assignment_ind" class="q-mb-sm" /> Novo Membro
+  <q-page>
+    <div v-if="isLoading">
+      <Skeleton></Skeleton>
     </div>
-    <div class="row q-col-gutter-md">
-      <div class="col-xs-12 col-sm-12">
-        <div class="text-h6 h6 text-primary">Dados Pessoais</div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input
-          type="text"
-          v-model="nome"
-          v-model.trim="$v.nome.$model"
-          :error="$v.nome.$error"
-          label="Nome Completo"
-          required
-        />
-        <div class="text-red required-alert" v-if="$v.telefone.$error">
-          O campo nome é obrigatório.
+    <div v-else>
+      <div class="q-pa-xl">
+        <div class="text-h4 h4 text-primary q-mb-xl">
+          <q-icon name="assignment_ind" class="q-mb-sm" /> Novo Membro
         </div>
-      </div>
+        <div class="row q-col-gutter-md">
+          <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Dados Pessoais</div>
+          </div>
 
-      <div class="col-xs-12 col-sm-6">
-        <q-input
-          type="text"
-          v-model="cpf"
-          label="CPF"
-          required
-          maxlenth="14"
-          v-model.trim="$v.cpf.$model"
-          :error="$v.cpf.$error"
-          v-mask="'###.###.###-##'"
-        />
-        <div class="text-red required-alert" v-if="$v.telefone.$error">
-          O campo deve conter 12 digitos.
+          <div class="col-xs-12 col-sm-6">
+            <q-input
+              type="text"
+              v-model="nome"
+              v-model.trim="$v.nome.$model"
+              :error="$v.nome.$error"
+              label="Nome Completo"
+              required
+            />
+            <div class="text-red required-alert" v-if="$v.telefone.$error">
+              O campo nome é obrigatório.
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input
+              type="text"
+              v-model="cpf"
+              label="CPF"
+              required
+              maxlenth="14"
+              v-model.trim="$v.cpf.$model"
+              :error="$v.cpf.$error"
+              v-mask="'###.###.###-##'"
+            />
+            <div class="text-red required-alert" v-if="$v.telefone.$error">
+              O campo deve conter 12 digitos.
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4">
+            <q-select v-model="sexo" :options="options_sexo" label="Sexo" />
+          </div>
+
+          <div class="col-xs-12 col-sm-4">
+            <q-input
+              type="text"
+              v-model="telefone"
+              label="Telefone"
+              v-model.trim="$v.telefone.$model"
+              :error="$v.telefone.$error"
+              v-mask="'(##) #####-####'"
+            />
+            <div class="text-red required-alert" v-if="$v.telefone.$error">
+              O campo deve conter 10 (fixo) ou 11 (celular) digitos.
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4">
+            <q-input
+              type="text"
+              v-model="email"
+              label="Email"
+              v-model.trim="$v.email.$model"
+              :error="$v.email.error"
+            />
+            <div class="text-red required-alert" v-if="$v.email.error">
+              Não é um e-mail válido
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input
+              v-model="data_nascimento"
+              mask="date"
+              label="Data de Nascimento"
+            >
+              <template v-slot:prepend>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy
+                    ref="qDateProxy"
+                    transition-show="scale"
+                    transition-hide="scale"
+                  >
+                    <q-date
+                      v-model="data_nascimento"
+                      @input="() => $refs.qDateProxy.hide()"
+                    />
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-select
+              v-model="estado_civil"
+              :options="options_estado_civil"
+              label="Estado Civil"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Dados de Endereço</div>
+          </div>
+
+          <div class="col-xs-12 col-sm-4">
+            <q-input
+              type="number"
+              v-model="cep"
+              label="Cep"
+              @blur="searchCep()"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-8">
+            <q-input type="text" v-model="endereco" label="Endereco" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="bairro" label="Bairro" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="number" v-model="numero" label="Numero" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="complemento" label="Complemento" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="cidade" label="Bairro" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="estado" label="Estado" />
+          </div>
+
+          <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Dados Profissionais</div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input type="text" v-model="profissao" label="Profissão" />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input
+              type="text"
+              v-model="endereco_trabalho"
+              label="Endereço do Trabalho"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Outros Dados</div>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-select
+              v-model="atuacao"
+              :options="options_atuacao"
+              label="Atuação na Igreja"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-input
+              v-model="data_conversao"
+              mask="date"
+              label="Data de Conversão"
+            >
+              <template v-slot:prepend>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy
+                    ref="qDateProxy"
+                    transition-show="scale"
+                    transition-hide="scale"
+                  >
+                    <q-date
+                      v-model="data_conversao"
+                      @input="() => $refs.qDateProxy.hide()"
+                    />
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-checkbox
+              v-model="batizado"
+              color="primary"
+              label="O membro é batizado?"
+              true-value="sim"
+              false-value="não"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <q-checkbox
+              v-model="afastado"
+              color="primary"
+              label="O membro está afastado?"
+              true-value="sim"
+              false-value="não"
+            />
+          </div>
+
+          <div class="col-xs-12 col-sm-12">
+            <div class="text-h6 h6 text-primary">Foto</div>
+          </div>
+
+          <span v-if="picture_edit">
+            <div class="col-xs-12 col-sm-6">
+              <q-list style="mix-width: 100%">
+                <q-item clickable v-ripple>
+                  <q-item-section thumbnail>
+                    <img
+                      :src="`http://localhost/uploads/avatars/${avatar}`"
+                      width="150px"
+                    />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-btn
+                      color="negative"
+                      label="Remover Imagem"
+                      @click="editPicture()"
+                    />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </span>
+
+          <div class="col-xs-12 col-sm-6" v-else>
+            <q-input
+              @input="
+                (val) => {
+                  avatar = val[0];
+                }
+              "
+              type="file"
+              hint="*jpg/jpeg"
+            />
+          </div>
         </div>
-      </div>
 
-      <div class="col-xs-12 col-sm-4">
-        <q-select v-model="sexo" :options="options_sexo" label="Sexo" />
-      </div>
-
-      <div class="col-xs-12 col-sm-4">
-        <q-input
-          type="text"
-          v-model="telefone"
-          label="Telefone"
-          v-model.trim="$v.telefone.$model"
-          :error="$v.telefone.$error"
-          v-mask="'(##) #####-####'"
-        />
-        <div class="text-red required-alert" v-if="$v.telefone.$error">
-          O campo deve conter 10 (fixo) ou 11 (celular) digitos.
+        <div class="row q-col-gutter-md justify-end q-mt-md">
+          <div class="col-xs-12 col-sm-3">
+            <q-btn
+              color="primary"
+              class="full-width"
+              label="save"
+              icon="save"
+              @click="saveData()"
+            />
+          </div>
         </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-4">
-        <q-input
-          type="text"
-          v-model="email"
-          label="Email"
-          v-model.trim="$v.email.$model"
-          :error="$v.email.error"
-        />
-        <div class="text-red required-alert" v-if="$v.email.error">
-          Não é um e-mail válido
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input
-          v-model="data_nascimento"
-          mask="date"
-          label="Data de Nascimento"
-        >
-          <template v-slot:prepend>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy
-                ref="qDateProxy"
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date
-                  v-model="data_nascimento"
-                  @input="() => $refs.qDateProxy.hide()"
-                />
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-select
-          v-model="estado_civil"
-          :options="options_estado_civil"
-          label="Estado Civil"
-        />
-      </div>
-
-      <div class="col-xs-12 col-sm-12">
-        <div class="text-h6 h6 text-primary">Dados de Endereço</div>
-      </div>
-
-      <div class="col-xs-12 col-sm-4">
-        <q-input type="number" v-model="cep" label="Cep" @blur="searchCep()" />
-      </div>
-
-      <div class="col-xs-12 col-sm-8">
-        <q-input type="text" v-model="endereco" label="Endereco" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="text" v-model="bairro" label="Bairro" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="number" v-model="numero" label="Numero" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="text" v-model="complemento" label="Complemento" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="text" v-model="cidade" label="Bairro" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="text" v-model="estado" label="Estado" />
-      </div>
-
-      <div class="col-xs-12 col-sm-12">
-        <div class="text-h6 h6 text-primary">Dados Profissionais</div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input type="text" v-model="profissao" label="Profissão" />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input
-          type="text"
-          v-model="endereco_trabalho"
-          label="Endereço do Trabalho"
-        />
-      </div>
-
-      <div class="col-xs-12 col-sm-12">
-        <div class="text-h6 h6 text-primary">Outros Dados</div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-select
-          v-model="atuacao"
-          :options="options_atuacao"
-          label="Atuação na Igreja"
-        />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-input v-model="data_conversao" mask="date" label="Data de Conversão">
-          <template v-slot:prepend>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy
-                ref="qDateProxy"
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date
-                  v-model="data_conversao"
-                  @input="() => $refs.qDateProxy.hide()"
-                />
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-checkbox
-          v-model="batizado"
-          color="primary"
-          label="O membro é batizado?"
-          true-value="sim"
-          false-value="não"
-        />
-      </div>
-
-      <div class="col-xs-12 col-sm-6">
-        <q-checkbox
-          v-model="afastado"
-          color="primary"
-          label="O membro está afastado?"
-          true-value="sim"
-          false-value="não"
-        />
-      </div>
-
-      <div class="col-xs-12 col-sm-12">
-        <div class="text-h6 h6 text-primary">Foto</div>
-      </div>
-
-      <span v-if="picture_edit">
-        <div class="col-xs-12 col-sm-6">
-          <q-list style="mix-width: 100%">
-            <q-item clickable v-ripple>
-              <q-item-section thumbnail>
-                <img
-                  :src="`http://localhost/uploads/avatars/${avatar}`"
-                  width="150px"
-                />
-              </q-item-section>
-              <q-item-section>
-                <q-btn
-                  color="negative"
-                  label="Remover Imagem"
-                  @click="editPicture()"
-                />
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </div>
-      </span>
-
-      <div class="col-xs-12 col-sm-6" v-else>
-        <q-input
-          @input="
-            (val) => {
-              avatar = val[0];
-            }
-          "
-          type="file"
-          hint="*jpg/jpeg"
-        />
       </div>
     </div>
-
-    <div class="row q-col-gutter-md justify-end q-mt-md">
-      <div class="col-xs-12 col-sm-3">
-        <q-btn
-          color="primary"
-          class="full-width"
-          label="save"
-          icon="save"
-          @click="saveData()"
-        />
-      </div>
-    </div>
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -261,7 +277,7 @@ import {
   email,
 } from "vuelidate/lib/validators";
 import { api, via } from "boot/axios";
-
+import Skeleton from "./../../components/skeleton/SkeletonMembros";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -303,6 +319,9 @@ export default {
       picture_edit: false,
     };
   },
+  components: {
+    Skeleton,
+  },
   validations: {
     nome: {
       required,
@@ -326,7 +345,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("membros", ["membros", "membroId"]),
+    ...mapState("membros", ["membros", "membroId", "isLoading"]),
   },
   methods: {
     ...mapActions("membros", [

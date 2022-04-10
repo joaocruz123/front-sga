@@ -36,13 +36,13 @@ footer .q-tab__icon{
   font-weight: bold;
 }
 
-.q-loading::before{
+/* .q-loading::before{
   opacity: 1;
 }
 
 .q-inner-loading{
   background: rgb(255 255 255);
-}
+} */
 /*--------------------------------------------------------------
 # Login
 --------------------------------------------------------------*/
@@ -94,7 +94,7 @@ footer .q-tab__icon{
 }
 
 .box-user .atuacao{
-  color: #353535;  
+  color: #353535;
   margin: 2px 0 0 0;
 }
 
@@ -149,7 +149,7 @@ footer .q-tab__icon{
 }
 
 .text-subtitle2{
-  margin: 8px 0; 
+  margin: 8px 0;
 }
 
 .text-subtitle3{

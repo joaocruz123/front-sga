@@ -11,10 +11,6 @@
       </q-item-section>
     </q-item>
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" />
@@ -26,10 +22,6 @@
     </q-item>
 
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" />
@@ -41,10 +33,6 @@
     </q-item>
 
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" width="35%" />
@@ -56,10 +44,6 @@
     </q-item>
 
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" width="35%" />
@@ -71,10 +55,6 @@
     </q-item>
 
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" width="35%" />
@@ -89,10 +69,6 @@
     </q-item>
 
     <q-item style="max-width: 100%">
-      <q-item-section avatar>
-        <q-skeleton type="QAvatar" />
-      </q-item-section>
-
       <q-item-section>
         <q-item-label>
           <q-skeleton type="text" width="35%" />
