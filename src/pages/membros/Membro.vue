@@ -452,7 +452,7 @@ export default {
           }
         }
 
-        if (this.id_membro != 0) {
+        if (this.id_membro != 'create') {
           this.editMembro([this.id_membro, form_data]);
         } else {
           this.saveMembro(form_data);

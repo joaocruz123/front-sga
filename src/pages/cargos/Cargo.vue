@@ -108,7 +108,7 @@ export default {
         ativo: this.ativo.value,
       };
 
-      if (this.id_cargo != 0) {
+      if (this.id_cargo != 'create') {
         this.editCargo([this.id_membro, data]);
       } else {
         this.saveCargo(data);

@@ -236,7 +236,7 @@ export default {
       this.actions = false;
     },
     getPage() {
-      this.getMembros(this.current_page);
+      this.getCargos(this.current_page);
     },
     open(id) {
       this.action_id = id;

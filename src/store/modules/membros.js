@@ -71,7 +71,7 @@ export default {
       const obj = JSON.parse(localStorage.access_user)
       let token = obj.access_token
 
-      //Loading.show(LoadingParameters)
+      Loading.show(LoadingParameters)
       context.commit('GET_DATA', true)
 
       axios.request('post', `/membros`, data, {
@@ -99,7 +99,7 @@ export default {
       const obj = JSON.parse(localStorage.access_user)
       let token = obj.access_token
 
-      L//oading.show(LoadingParameters)
+      Loading.show(LoadingParameters)
 
       let id = params[0]
       let data = params[1]
@@ -128,7 +128,7 @@ export default {
       const obj = JSON.parse(localStorage.access_user)
       let token = obj.access_token
 
-      //Loading.show(LoadingParameters)
+      Loading.show(LoadingParameters)
 
       await axios.request('delete', `/membros/${id}`, '', { Authorization: 'Bearer ' + token })
         .then(response => {
