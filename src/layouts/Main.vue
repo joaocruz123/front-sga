@@ -71,6 +71,7 @@ import { mapActions, mapState } from "vuex";
 import Menu from "./../components/menu/Menu";
 import FooterHome from "./../components/menu/FooterHome";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
+import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
 let unsubscribe;
 
 export default {
@@ -88,6 +89,7 @@ export default {
   components: {
     Menu,
     FooterHome,
+    VueSidebarMenuAkahon
   },
   created() {
     this.setNamePage("Dashboard");

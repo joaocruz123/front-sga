@@ -9159,6 +9159,14 @@ vue-server-renderer@2.6.14:
     serialize-javascript "^3.1.0"
     source-map "0.5.6"
 
+vue-sidebar-menu-akahon@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vue-sidebar-menu-akahon/-/vue-sidebar-menu-akahon-0.1.4.tgz#9508e41894a8545fb801880a7fb12200abec6783"
+  integrity sha512-Ut1KFNSROs8//qud+1KnJELRw52B1zisTOQUqpTMebS9sYE7VkTA9iV2VUBReifqS8S7AU5xq5NeqoxQnrDA/g==
+  dependencies:
+    core-js "^3.6.5"
+    vue "^2.6.11"
+
 vue-sidebar-menu@^4.8.1:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/vue-sidebar-menu/-/vue-sidebar-menu-4.8.1.tgz#b27126d5e5a63eae5e1d3a63c94de7704f13962a"
@@ -9188,7 +9196,12 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@2.6.14, vue@^2.5.21, vue@^2.6.10, vue@^2.6.12:
+vue-top-progress@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/vue-top-progress/-/vue-top-progress-0.7.0.tgz#44903cfc81425297065abf58cbd75ff05c3afbeb"
+  integrity sha512-pkZQuT3yxkRtB3QvrL2eF1h/F01JbJaI3eqdiM4CGZbsexLKJctYRolGHzK87c11moyx+aK8lwzeq8aPPoNOqA==
+
+vue@2.6.14, vue@^2.5.21, vue@^2.6.10, vue@^2.6.11, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==

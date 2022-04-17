@@ -21,6 +21,7 @@
     "vue": "^2.6.12",
     "vue-axios-cors": "^1.0.1",
     "vue-sidebar-menu": "^4.8.1",
+    "vue-sidebar-menu-akahon": "^0.1.4",
     "vue-top-progress": "^0.7.0",
     "vuelidate": "^0.7.7"
   },
